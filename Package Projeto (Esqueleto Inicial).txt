@@ -1,0 +1,211 @@
+_____________________________________________________________________
+package projeto;
+
+public class Commit extends ItemControle{
+	private String nome;
+	private Usuario autor;
+	private Commit[] listarCommits = new Commit[100];
+	
+	public Commit(String n, Usuario aut, int id, String desc) {
+		this.id = id;
+		descricao = desc;
+		nome = n;
+		autor = aut;
+	}
+	
+	public void editarCommit() {
+		//Args
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Usuario getAutor() {
+		return autor;
+	}
+
+	public void setAutor(Usuario autor) {
+		this.autor = autor;
+	}
+
+	public Commit[] getListarCommits() {
+		return listarCommits;
+	}
+
+	public void setListarCommits(Commit[] listarCommits) {
+		this.listarCommits = listarCommits;
+	}
+}
+_____________________________________________________________________
+package projeto;
+
+public class Issue extends ItemControle{
+	private String comentario;
+	private boolean status;
+	
+	public Issue(String coment, boolean stat, int id, String desc) {
+		this.id = id;
+		descricao = desc;
+		comentario = coment;
+		status = stat;
+	}
+
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+	
+}
+_____________________________________________________________________
+package projeto;
+
+public abstract class ItemControle {
+	protected int id;
+	protected String descricao;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+}
+_____________________________________________________________________
+package projeto;
+
+public class Projeto {
+	private String nome;
+	private String descricao;
+	private Repositorio[] repositorios = new Repositorio[100];
+	public Projeto(String nome, String descricao) {
+		this.nome = nome;
+		this.descricao = descricao;
+	}
+	
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	public Repositorio[] getRepositorios() {
+		return repositorios;
+	}
+	public void setRepositorios(Repositorio[] repositorios) {
+		this.repositorios = repositorios;
+	}
+	
+	
+}
+_____________________________________________________________________
+package projeto;
+
+public class Repositorio {
+	private String nome;
+	private String descricao;
+	private String proprietario;
+	private String readme;
+	private Commit[] commits = new Commit[100];
+	private Issue[] issues = new Issue[100];
+	
+	public Repositorio(String nome, String descricao, String proprietario, String readme) {
+		this.nome = nome;
+		this.descricao = descricao;
+		this.proprietario = proprietario;
+		this.readme = readme;
+	}
+	
+	public boolean adicionarReadme() {
+		 //Asdlsandlsad
+	}
+
+	
+}
+_____________________________________________________________________
+package projeto;
+
+public class Usuario {
+	private String nome;
+	private String email;
+	private String senha;
+	private String biografia;
+	private Projeto[] projetos = new Projeto[100];
+	
+	public Usuario(String nome, String email, String senha, String biografia) {
+		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
+		this.biografia = biografia;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getBiografia() {
+		return biografia;
+	}
+
+	public void setBiografia(String biografia) {
+		this.biografia = biografia;
+	}
+
+	public Projeto[] getProjetos() {
+		return projetos;
+	}
+
+	public void setArrayProjetos(Projeto[] p) {
+		this.projetos = p;
+	}
+			
+	
+}
+_____________________________________________________________________
