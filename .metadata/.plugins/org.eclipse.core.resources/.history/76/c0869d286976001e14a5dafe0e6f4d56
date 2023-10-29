@@ -1,0 +1,10 @@
+package projeto;
+
+import java.util.Date;
+
+public class Commit extends ItemControle{
+	private Usuario autor;
+	private Date dtEnvio;
+	
+	
+}

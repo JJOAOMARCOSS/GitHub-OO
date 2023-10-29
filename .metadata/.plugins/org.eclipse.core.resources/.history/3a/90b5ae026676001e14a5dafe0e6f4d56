@@ -1,0 +1,8 @@
+package projeto;
+
+public class Projeto {
+	private String nome;
+	private ArrayList<Repositorio> listaRepositorios;
+	
+	
+}

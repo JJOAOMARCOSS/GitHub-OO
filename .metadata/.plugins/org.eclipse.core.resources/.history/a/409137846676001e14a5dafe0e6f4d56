@@ -1,0 +1,33 @@
+package projeto;
+
+import java.util.ArrayList;
+
+public class Projeto {
+	private String nome;
+	private ArrayList<Repositorio> listaRepositorios;
+	
+	public Projeto(String nome) {
+		this.nome = nome;
+		listaRepositorios = new ArrayList<Repositorio>();
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public ArrayList<Repositorio> getListaRepositorios() {
+		return listaRepositorios;
+	}
+
+	public void setListaRepositorios(ArrayList<Repositorio> listaRepositorios) {
+		this.listaRepositorios = listaRepositorios;
+	}
+	
+	public boolean addRepositorio(Repositorio repositorio) {
+		return listaRepositorios.add(repositorio);
+	}
+}
