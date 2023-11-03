@@ -26,7 +26,6 @@ public class Issue extends ItemControle{
 		this.responsavel = responsavel;
 	}
 
-	@Override
 	public String toString() {
 		return "Status: " + status + ", Responsavel: " + responsavel.getNome();
 	}

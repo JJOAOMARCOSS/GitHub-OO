@@ -1,24 +1,22 @@
 package projeto;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-
 public class Repositorio {
 	private String nome;
 	private Usuario usuario;
-	private Date dtCriacao;
-	private ArrayList<Commit> listaCommits;
-	private ArrayList<Issue> listaIssues;
+	private String dtCriacao;
+	private Commit[] listaCommits = new Commit[100];
+	private Issue[] listaIssues = new Issue[100];
+	private int numCommits;
+	private int numIssues;
 	
-	public Repositorio(String nome, Usuario usuario, Date dtCriacao) {
+	public Repositorio(String nome, Usuario usuario, String dtCriacao) {
 		this.nome = nome;
 		this.usuario = usuario;
 		this.dtCriacao = dtCriacao;
-		listaCommits = new ArrayList<Commit>();
-		listaIssues = new ArrayList<Issue>();
+		numCommits = 0;
+		numIssues = 0;
 	}
-
+	
 	public String getNome() {
 		return nome;
 	}
@@ -35,41 +33,90 @@ public class Repositorio {
 		this.usuario = usuario;
 	}
 
-	public Date getDtCriacao() {
+	public String getDtCriacao() {
 		return dtCriacao;
 	}
 
-	public void setDtCriacao(Date dtCriacao) {
+	public void setDtCriacao(String dtCriacao) {
 		this.dtCriacao = dtCriacao;
 	}
 
-	public ArrayList<Commit> getListaCommits() {
+	public Commit[] getListaCommits() {
 		return listaCommits;
 	}
-
-	public void setListaCommits(ArrayList<Commit> listaCommits) {
+	
+	public void setArrayCommit(Commit c, int i) {
+		this.listaCommits[i] = c;
+	}
+	
+	public void setListaCommits(Commit[] listaCommits) {
 		this.listaCommits = listaCommits;
 	}
+	
+	public Commit getCommit(int i) {
+		return listaCommits[i];
+	}
 
-	public ArrayList<Issue> getListaIssues() {
+	public Issue[] getListaIssues() {
 		return listaIssues;
 	}
 
-	public void setListaIssues(ArrayList<Issue> listaIssues) {
+	public void setArrayListaIssues(Issue[] listaIssues) {
 		this.listaIssues = listaIssues;
 	}
+
+	public int getNumCommits() {
+		return numCommits;
+	}
+
+	public void setNumCommits(int numCommits) {
+		this.numCommits = numCommits;
+	}
+
+	public int getNumIssues() {
+		return numIssues;
+	}
+
+	public void setNumIssues(int numIssues) {
+		this.numIssues = numIssues;
+	}
 	
-	//Adicionar Buscar Commit
+	public void setArrayIssue(Issue iss, int i) {
+		this.listaIssues[i] = iss;
+	}
 	
-	//Adcionar Buscar Issue
+	public Issue getIssue(int i) {
+		return listaIssues[i];
+	}
 	
-	@Override
+	public void setIssue(Issue iss, int i) {
+		this.listaIssues[i] = iss;
+	}
+	
+	public boolean addcommit(Commit c) {
+		if(numCommits < 100) {
+			listaCommits[numCommits] = c;
+			numCommits++;
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean addissue(Issue is) {
+		if(numIssues < 100) {
+			listaIssues[numIssues] = is;
+			numIssues++;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public String toString() {
 		
-		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yy");
-		
 		return "Nome: " + nome + ", Usuario: " + usuario.getNome() + 
-				", Data de Criação: " + data.format(dtCriacao) + 
-				", Lista de Commits: " + listaCommits.size() + ", Lista de Issues: " + listaIssues.size();
+				", Data de Criação: " + dtCriacao;
 	}
+	
 }

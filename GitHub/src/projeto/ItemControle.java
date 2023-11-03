@@ -35,7 +35,6 @@ public abstract class ItemControle {
 		this.descricao = descricao;
 	}
 
-	@Override
 	public String toString() {
 		return "Nome: " + nome + ", Id: " + id + ", Descrição: " + descricao;
 	}
