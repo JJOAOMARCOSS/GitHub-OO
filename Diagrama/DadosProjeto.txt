@@ -1,3 +1,10 @@
+set nome = método para modificar nome
+
+classes do pacote negocio não coletam informações ou interagem com o usuário
+(nada de printf ou scanner)
+
+interação com o usuario ficam na view
+--------------------------------------------------------------------------------------------------
 package dados;
 
 import projeto.*;
@@ -18,8 +25,6 @@ public class Dados {
 		usuarios = new Usuario[100];
 		repositorios = new Repositorio[100];
 		projetos = new Projeto[100];
-		commits = new Commit[100];
-		issues = new Issue[100];
 	}
 
 	// Usuario
