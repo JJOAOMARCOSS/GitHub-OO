@@ -93,7 +93,7 @@ public class Repositorio {
 		this.listaIssues[i] = iss;
 	}
 	
-	public boolean addcommit(Commit c) {
+	public boolean addCommit(Commit c) {
 		if(numCommits < 100) {
 			listaCommits[numCommits] = c;
 			numCommits++;
@@ -103,7 +103,7 @@ public class Repositorio {
 		}
 	}
 	
-	public boolean addissue(Issue is) {
+	public boolean addIssue(Issue is) {
 		if(numIssues < 100) {
 			listaIssues[numIssues] = is;
 			numIssues++;
