@@ -47,7 +47,7 @@ public class Usuario {
 	}
 	
 	public Projeto getProjeto(int i) {
-		return listaProjetos[i];//.getProjeto()
+		return listaProjetos[i].getProjeto();
 	}
 	
 	public void setProjeto(Projeto projs, int i) {
@@ -76,18 +76,7 @@ public class Usuario {
 		}
 	}
 	
-	/*
-	public String buscarProjeto() {
-        String nome =  "Nome do Projeto:\n ";
-        for(int i = 0; i < numProjetos; i++) {
-        System.out.println(i);
-            nome = nome + "\n" + listaProjetos[i].getProjeto().toString(); //resolver o problema do getRepositorio
-        }
-
-        return nome; 
-    }*/
-	
-	public Projeto buscarProjeto(String nomeProjeto) {
+	public Projeto buscarPackageProjeto(String nomeProjeto) {
 	    for (int i = 0; i < numProjetos; i++) {
 	        Projeto projeto = listaProjetos[i];
 	        if (projeto.getNome().equals(nomeProjeto)) {

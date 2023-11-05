@@ -61,7 +61,7 @@ public class Main {
 					System.out.println("Escolha um dos Repositorios a seguir para editar as informações:\n");
 					listarRepositorios();
 					aux = in.nextInt();
-					Repositorio r = lerDadosRepositorio();
+					Repositoriorio r = lerDadosRepositorio();
 					editar(aux, r);
 					break;
 				case 12:

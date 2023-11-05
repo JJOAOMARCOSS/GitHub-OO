@@ -47,7 +47,7 @@ public class Usuario {
 	}
 	
 	public Projeto getProjeto(int i) {
-		return listaProjetos[i];//.getProjeto()
+		return listaProjetos[i].getProjeto();
 	}
 	
 	public void setProjeto(Projeto projs, int i) {

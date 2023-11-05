@@ -146,7 +146,7 @@ public class Dados {
 	}
 
 	public int getnCommits() {
-		return nCommits;
+		return nRepositorios;
 	}
 
 	public void setnCommits(int nCommits) {
