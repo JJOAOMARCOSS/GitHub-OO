@@ -17,7 +17,10 @@ public class Commit extends ItemControle{
 	}
 
 	public String toString() {
-		return "Data de envio: " + dtEnvio; 
+		return "Nome: " + nome + ", " +
+		"Id: " + id + ", " +
+		"Descricao: " + descricao + ", " +
+		"DtEnvio: " + dtEnvio; 
 	}
 
 
