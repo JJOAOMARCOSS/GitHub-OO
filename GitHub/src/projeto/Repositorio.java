@@ -1,22 +1,15 @@
 package projeto;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-
 public class Repositorio {
 	private String nome;
-	private Usuario usuario;
-	private Date dtCriacao;
-	private ArrayList<Commit> listaCommits;
-	private ArrayList<Issue> listaIssues;
+	private String dtCriacao;
+	private ItemControle[] listaItensControles = new ItemControle[100]; 
+	private int numItensControles;
 	
-	public Repositorio(String nome, Usuario usuario, Date dtCriacao) {
+	public Repositorio(String nome, String dtCriacao) {
 		this.nome = nome;
-		this.usuario = usuario;
 		this.dtCriacao = dtCriacao;
-		listaCommits = new ArrayList<Commit>();
-		listaIssues = new ArrayList<Issue>();
+		numItensControles = 0;
 	}
 
 	public String getNome() {
@@ -27,49 +20,62 @@ public class Repositorio {
 		this.nome = nome;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	public Date getDtCriacao() {
+	public String getDtCriacao() {
 		return dtCriacao;
 	}
 
-	public void setDtCriacao(Date dtCriacao) {
+	public void setDtCriacao(String dtCriacao) {
 		this.dtCriacao = dtCriacao;
 	}
 
-	public ArrayList<Commit> getListaCommits() {
-		return listaCommits;
+	public ItemControle[] getListarItensControles() {
+		return this.listaItensControles;
 	}
 
-	public void setListaCommits(ArrayList<Commit> listaCommits) {
-		this.listaCommits = listaCommits;
+	public void setListarItensControles(ItemControle[] ic) {
+		this.listaItensControles = ic;
 	}
 
-	public ArrayList<Issue> getListaIssues() {
-		return listaIssues;
+	public ItemControle getItemControle(int i) {
+		return listaItensControles[i];
+	}
+	
+	public void setItemControle(ItemControle ic, int i) {
+		this.listaItensControles[i] = ic;
+	}
+	
+	public int getNumItensControles() {
+		return numItensControles;
 	}
 
-	public void setListaIssues(ArrayList<Issue> listaIssues) {
-		this.listaIssues = listaIssues;
+	public void setNumItensControles(int numItensControles) {
+		this.numItensControles = numItensControles;
 	}
 	
-	//Adicionar Buscar Commit
-	
-	//Adcionar Buscar Issue
-	
-	@Override
 	public String toString() {
-		
-		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yy");
-		
-		return "Nome: " + nome + ", Usuario: " + usuario.getNome() + 
-				", Data de Criação: " + data.format(dtCriacao) + 
-				", Lista de Commits: " + listaCommits.size() + ", Lista de Issues: " + listaIssues.size();
+		return "Nome: " + nome + ", Data de criação: " + dtCriacao;
+	}
+	
+	public boolean addItemControle(ItemControle ic) {
+		if(numItensControles < 100) {
+			listaItensControles[numItensControles] = ic; 
+			numItensControles++;
+			
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public ItemControle buscaItemControle(String nomeItemControle) {
+		ItemControle saida = null;
+		for(int i = 0; i < numItensControles; i++) {
+			if(saida.getNome().compareToIgnoreCase(nomeItemControle) == 0) {
+				saida = listaItensControles[i];
+			}
+		}
+			return saida;
 	}
 }
+	

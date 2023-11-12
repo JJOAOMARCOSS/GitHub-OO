@@ -1,0 +1,68 @@
+package projeto;
+
+public class Projeto {
+	private String nome;
+	private Repositorio[] listaRepositorios = new Repositorio [100];
+	private int numRepositorios;
+	
+	public Projeto(String nome) {
+		this.nome = nome;
+		numRepositorios = 0;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Repositorio[] getListaRepositorios() {
+		return this.listaRepositorios;
+	}
+
+	public void setArrayListaRepositorios(Repositorio[] r) {
+		this.listaRepositorios = r;
+	}
+	
+	public Repositorio getRepositorio(int i) { 
+		return listaRepositorios[i];
+	}
+	
+	public void setRepositorio(Repositorio repo, int i) {
+		this.listaRepositorios[i] = repo;
+	}
+
+	public int getNumRepositorios() {
+		return numRepositorios;
+	}
+
+	public void setNumRepositorios(int numRepositorios) {
+		this.numRepositorios = numRepositorios;
+	}
+
+	public String toString() {
+		return "Projeto: " + nome;
+	}
+	
+	public boolean addrepositorio(Repositorio r) {
+		if(numRepositorios < 100) {
+			listaRepositorios[numRepositorios] = r;
+			numRepositorios++;
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public String buscarRepositorio() {
+        String nome =  "Nome do Repositório:\n ";
+        for(int i = 0; i < numRepositorios; i++) {
+        System.out.println(i);
+            nome = nome + "\n" + listaRepositorios[i].toString(); //resolver o problema do getRepositorio
+        }
+
+        return nome; 
+    }
+}

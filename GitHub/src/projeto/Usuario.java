@@ -1,18 +1,17 @@
 package projeto;
 
-import java.util.ArrayList;
-
 public class Usuario {
 	private String nome;
 	private String email;
 	private String senha;
-	private ArrayList<Projeto> listaProjetos;
+	private Projeto[] listaProjetos = new Projeto [100];
+	private int numProjetos;
 	
 	public Usuario(String nome, String email, String senha) {
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
-		listaProjetos = new ArrayList<Projeto>();
+		numProjetos = 0;
 	}
 
 	public String getNome() {
@@ -39,29 +38,52 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public ArrayList<Projeto> getListaProjetos() {
-		return listaProjetos;
+	public Projeto[] getListaProjetos() {
+		return this.listaProjetos;
 	}
 
-	public void setListaProjetos(ArrayList<Projeto> listaProjetos) {
-		this.listaProjetos = listaProjetos;
+	public void setArrayListaProjetos(Projeto[] p) {
+		this.listaProjetos = p;
 	}
 	
-	public boolean addProjeto(Projeto projeto) {
-		return listaProjetos.add(projeto);
+	public Projeto getProjeto(int i) {
+		return listaProjetos[i];//.getProjeto()
 	}
 	
-	public boolean deletarProjeto(Projeto projeto) {
-		return listaProjetos.remove(projeto);
+	public void setProjeto(Projeto projs, int i) {
+		this.listaProjetos[i] = projs;
 	}
-	
-	//Criar o Buscar Projeto
 
-	@Override
+	public int getNumProjetos() {
+		return numProjetos;
+	}
+
+	public void setNumProjetos(int numProjetos) {
+		this.numProjetos = numProjetos;
+	}
+	
 	public String toString() {
-		return "Usuario" + nome + ", Email: " + email + ", Senha: " + senha + 
-				", Projetos: " + listaProjetos.size();
+		return "Usuario: " + nome + ", Email: " + email + ", Senha: " + senha;
 	}
 	
+	public boolean addprojeto(Projeto p) {
+		if(numProjetos < 100) {
+			listaProjetos[numProjetos] = p;
+			numProjetos++;
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
-}
+	public Projeto buscaProjeto(String nomeProjeto) {
+		Projeto saida = null;
+		for(int i = 0; i < numProjetos; i++) {
+			if(saida.getNome().compareToIgnoreCase(nomeProjeto) == 0) {
+				saida = listaProjetos[i];
+		}
+	}
+		return saida;
+	}
+	
+	}

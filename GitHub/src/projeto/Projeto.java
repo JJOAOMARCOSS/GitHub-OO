@@ -1,14 +1,13 @@
 package projeto;
 
-import java.util.ArrayList;
-
 public class Projeto {
 	private String nome;
-	private ArrayList<Repositorio> listaRepositorios;
+	private Repositorio[] listaRepositorios = new Repositorio [100];
+	private int numRepositorios;
 	
 	public Projeto(String nome) {
 		this.nome = nome;
-		listaRepositorios = new ArrayList<Repositorio>();
+		numRepositorios = 0;
 	}
 
 	public String getNome() {
@@ -19,27 +18,56 @@ public class Projeto {
 		this.nome = nome;
 	}
 
-	public ArrayList<Repositorio> getListaRepositorios() {
-		return listaRepositorios;
+	public Repositorio[] getListaRepositorios() {
+		return this.listaRepositorios;
 	}
 
-	public void setListaRepositorios(ArrayList<Repositorio> listaRepositorios) {
-		this.listaRepositorios = listaRepositorios;
+	public void setArrayListaRepositorios(Repositorio[] r) {
+		this.listaRepositorios = r;
 	}
 	
-	public boolean addRepositorio(Repositorio repositorio) {
-		return listaRepositorios.add(repositorio);
+	public Repositorio getRepositorio(int i) { 
+		return listaRepositorios[i];
 	}
 	
-	public boolean deletarReposito(Repositorio repositorio) {
-		return listaRepositorios.remove(repositorio);
+	public void setArrayRepositorio(Repositorio repo, int i) {
+		this.listaRepositorios[i] = repo;
 	}
 	
-	//Adicionar o buscar repositorio
-	
-	@Override
+	public void setRepositorio(Repositorio repo, int i) {
+		this.listaRepositorios[i] = repo;
+	}
+
+	public int getNumRepositorios() {
+		return numRepositorios;
+	}
+
+	public void setNumRepositorios(int numRepositorios) {
+		this.numRepositorios = numRepositorios;
+	}
+
 	public String toString() {
-		return "Usuario" + nome + 
-				", Repositorios: " + listaRepositorios.size();
+		return "Projeto: " + nome;
 	}
-}
+	
+	
+	
+	public boolean addrepositorio(Repositorio r) {
+		if(numRepositorios < 100) {
+			listaRepositorios[numRepositorios] = r;
+			numRepositorios++;
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public Repositorio buscaRepositorio(String nomeRepositorio) {
+		Repositorio saida = null;
+		for(int i = 0; i < numRepositorios; i++) {
+			if(saida.getNome().compareToIgnoreCase(nomeRepositorio) == 0) {
+				saida = listaRepositorios[i];
+			}
+		} 
+			return saida;
+		}
+	}
