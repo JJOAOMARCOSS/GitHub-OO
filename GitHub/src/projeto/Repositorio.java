@@ -40,6 +40,7 @@ public class Repositorio {
 		return listaItensControles[i];
 	}
 	
+<<<<<<< HEAD
 	public void setItemControle(ItemControle ic, int i) {
 		this.listaItensControles[i] = ic;
 	}
@@ -51,6 +52,11 @@ public class Repositorio {
 	public void setNumItensControles(int numItensControles) {
 		this.numItensControles = numItensControles;
 	}
+=======
+	//Adicionar Buscar Commit
+	
+	//Adcionar Buscar Issue
+>>>>>>> main
 	
 	public String toString() {
 		return "Nome: " + nome + ", Data de criação: " + dtCriacao;
