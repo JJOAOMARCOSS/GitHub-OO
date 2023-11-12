@@ -2,12 +2,11 @@ package projeto;
 
 public class Issue extends ItemControle{
 	private String status;
-	private Usuario responsavel;
 	
-	public Issue(String nome, int id, String descricao, String status, Usuario responsavel) {
+	public Issue(String nome, int id, String descricao, String status) {
 		super(nome, id, descricao);
 		this.status = status;
-		this.responsavel = responsavel;
+
 	}
 
 	public String getStatus() {
@@ -18,17 +17,7 @@ public class Issue extends ItemControle{
 		this.status = status;
 	}
 
-	public Usuario getResponsavel() {
-		return responsavel;
-	}
-
-	public void setResponsavel(Usuario responsavel) {
-		this.responsavel = responsavel;
-	}
-
 	public String toString() {
-		return "Status: " + status + ", Responsavel: " + responsavel.getNome();
+		return "Status: " + status; 
 	}
-	
-	
 }

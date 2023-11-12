@@ -61,16 +61,13 @@ public class Projeto {
 			return false;
 		}
 	}
-	
-	public String buscarRepositorio() {
-        String nome =  "Nome do Repositório:\n ";
-        for(int i = 0; i < numRepositorios; i++) {
-        System.out.println(i);
-            nome = nome + "\n" + listaRepositorios[i].toString(); //resolver o problema do getRepositorio
-        }
-
-        return nome; 
-    }
-
-
-}
+	public Repositorio buscaRepositorio(String nomeRepositorio) {
+		Repositorio saida = null;
+		for(int i = 0; i < numRepositorios; i++) {
+			if(saida.getNome().compareToIgnoreCase(nomeRepositorio) == 0) {
+				saida = listaRepositorios[i];
+			}
+		} 
+			return saida;
+		}
+	}

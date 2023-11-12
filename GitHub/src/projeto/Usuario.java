@@ -76,25 +76,14 @@ public class Usuario {
 		}
 	}
 	
-	/*
-	public String buscarProjeto() {
-        String nome =  "Nome do Projeto:\n ";
-        for(int i = 0; i < numProjetos; i++) {
-        System.out.println(i);
-            nome = nome + "\n" + listaProjetos[i].getProjeto().toString(); //resolver o problema do getRepositorio
-        }
-
-        return nome; 
-    }*/
-	
-	public Projeto buscarProjeto(String nomeProjeto) {
-	    for (int i = 0; i < numProjetos; i++) {
-	        Projeto projeto = listaProjetos[i];
-	        if (projeto.getNome().equals(nomeProjeto)) {
-	            return projeto; // Retorna o projeto se encontrar um com o nome correspondente.
-	        }
-	    }
-	    // Retorna null se nenhum projeto com o nome correspondente for encontrado.
-	    return null;
+	public Projeto buscaProjeto(String nomeProjeto) {
+		Projeto saida = null;
+		for(int i = 0; i < numProjetos; i++) {
+			if(saida.getNome().compareToIgnoreCase(nomeProjeto) == 0) {
+				saida = listaProjetos[i];
+		}
 	}
-}
+		return saida;
+	}
+	
+	}

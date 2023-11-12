@@ -2,35 +2,22 @@ package projeto;
 
 public class Repositorio {
 	private String nome;
-	private Usuario usuario;
 	private String dtCriacao;
-	private Commit[] listaCommits = new Commit[100];
-	private Issue[] listaIssues = new Issue[100];
-	private int numCommits;
-	private int numIssues;
+	private ItemControle[] listaItensControles = new ItemControle[100]; 
+	private int numItensControles;
 	
-	public Repositorio(String nome, Usuario usuario, String dtCriacao) {
+	public Repositorio(String nome, String dtCriacao) {
 		this.nome = nome;
-		this.usuario = usuario;
 		this.dtCriacao = dtCriacao;
-		numCommits = 0;
-		numIssues = 0;
+		numItensControles = 0;
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 
 	public String getDtCriacao() {
@@ -41,82 +28,54 @@ public class Repositorio {
 		this.dtCriacao = dtCriacao;
 	}
 
-	public Commit[] getListaCommits() {
-		return listaCommits;
-	}
-	
-	public void setArrayCommit(Commit c, int i) {
-		this.listaCommits[i] = c;
-	}
-	
-	public void setListaCommits(Commit[] listaCommits) {
-		this.listaCommits = listaCommits;
-	}
-	
-	public Commit getCommit(int i) {
-		return listaCommits[i];
+	public ItemControle[] getListarItensControles() {
+		return this.listaItensControles;
 	}
 
-	public Issue[] getListaIssues() {
-		return listaIssues;
+	public void setListarItensControles(ItemControle[] ic) {
+		this.listaItensControles = ic;
 	}
 
-	public void setArrayListaIssues(Issue[] listaIssues) {
-		this.listaIssues = listaIssues;
-	}
-
-	public int getNumCommits() {
-		return numCommits;
-	}
-
-	public void setNumCommits(int numCommits) {
-		this.numCommits = numCommits;
-	}
-
-	public int getNumIssues() {
-		return numIssues;
-	}
-
-	public void setNumIssues(int numIssues) {
-		this.numIssues = numIssues;
+	public ItemControle getItemControle(int i) {
+		return listaItensControles[i];
 	}
 	
-	public void setArrayIssue(Issue iss, int i) {
-		this.listaIssues[i] = iss;
+	public void setItemControle(ItemControle ic, int i) {
+		this.listaItensControles[i] = ic;
 	}
 	
-	public Issue getIssue(int i) {
-		return listaIssues[i];
-	}
-	
-	public void setIssue(Issue iss, int i) {
-		this.listaIssues[i] = iss;
-	}
-	
-	public boolean addCommit(Commit c) {
-		if(numCommits < 100) {
-			listaCommits[numCommits] = c;
-			numCommits++;
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public boolean addIssue(Issue is) {
-		if(numIssues < 100) {
-			listaIssues[numIssues] = is;
-			numIssues++;
-			return true;
-		} else {
-			return false;
-		}
+	public int getNumItensControles() {
+		return numItensControles;
 	}
 
+	public void setNumItensControles(int numItensControles) {
+		this.numItensControles = numItensControles;
+	}
+	
 	public String toString() {
-		
-		return "Nome: " + nome + ", Usuario: " + usuario.getNome() + 
-				", Data de Criação: " + dtCriacao;
+		return "Nome: " + nome + ", Data de criação: " + dtCriacao;
 	}
 	
+	public boolean addItemControle(ItemControle ic) {
+		if(numItensControles < 100) {
+			listaItensControles[numItensControles] = ic; 
+			numItensControles++;
+			
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public ItemControle buscaItemControle(String nomeItemControle) {
+		ItemControle saida = null;
+		for(int i = 0; i < numItensControles; i++) {
+			if(saida.getNome().compareToIgnoreCase(nomeItemControle) == 0) {
+				saida = listaItensControles[i];
+			}
+		}
+			return saida;
+	}
 }
+	
