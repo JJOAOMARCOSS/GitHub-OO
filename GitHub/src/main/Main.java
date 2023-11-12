@@ -276,18 +276,13 @@ public class Main {
 	
 	public static Repositorio lerDadosRepositorio() {
 		String nome;
-		in.nextLine();
-		Usuario usuario;
-		in.nextLine();
 		String dtCriacao;
 		in.nextLine(); //esvazia dados do teclado
 		System.out.println("Digite o nome do Repositorio: ");
 		nome = in.nextLine();
-		System.out.println("Digite o nome do Usuario que criou o Repositorio: ");
-		usuario = in.nextLine();//Resolver isso
 		System.out.println("Digite a data de criação do Repositorio: ");
 		dtCriacao = in.nextLine();
-		Repositorio r = new Repositorio(nome, usuario, dtCriacao);
+		Repositorio r = new Repositorio(nome, dtCriacao);
 		return r;	
 	}
 	
@@ -345,15 +340,21 @@ public class Main {
 	}
 	
 	public static Commit lerDadosCommit() {
-		Usuario autor;
-		in.nextLine();
+		String nome;
+		int id;
+		String descricao;
 		String dtEnvio;
 		in.nextLine(); //esvazia dados do teclado
-		System.out.println("Digite o autor do Commit: ");
-		autor = in.nextLine();
+		System.out.println("Digite o nome do Commit: ");
+		nome = in.nextLine();
+		System.out.println("Digite o ID: ");
+		id = in.nextInt();
+		in.nextLine();
+		System.out.println("Digite a Descrição: ");
+		descricao = in.nextLine();
 		System.out.println("Digite a data de envio do Commit: ");
 		dtEnvio = in.nextLine();
-		Commit c = new Commit(autor, dtEnvio);
+		Commit c = new Commit(nome, id, descricao, dtEnvio);
 		return c;	
 	}
 	
@@ -411,15 +412,21 @@ public class Main {
 	}
 	
 	public static Issue lerDadosIssue() {
+		String nome;
+		int id;
+		String descricao;
 		String status;
 		in.nextLine();
-		Usuario responsavel;
-		in.nextLine(); //esvazia dados do teclado
+		System.out.println("Digite o nome do Issue: ");
+		nome = in.nextLine();
+		System.out.println("Digite o ID: ");
+		id = in.nextInt();
+		in.nextLine();
+		System.out.println("Digite a Descrição: ");
+		descricao = in.nextLine();
 		System.out.println("Digite o status do Issue: ");
 		status = in.nextLine();
-		System.out.println("Digite o responsavel pelo Issue: ");
-		responsavel = in.nextLine();
-		Issue iss = new Issue(status, responsavel);
+		Issue iss = new Issue(nome, id, descricao, status);
 		return iss;	
 	}
 	
