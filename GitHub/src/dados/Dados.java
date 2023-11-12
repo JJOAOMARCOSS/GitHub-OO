@@ -146,11 +146,7 @@ public class Dados {
 	}
 
 	public int getnCommits() {
-<<<<<<< HEAD
 		return nCommits;
-=======
-		return nRepositorios;
->>>>>>> main
 	}
 
 	public void setnCommits(int nCommits) {
@@ -195,17 +191,10 @@ public class Dados {
 			String s = String.valueOf(i);
 			usuarios[i] = new Usuario("Nome".concat(s), "email".concat(s), "senha".concat(s));
 			projetos[i] = new Projeto("Nome".concat(s));
-<<<<<<< HEAD
 			repositorios[i] = new Repositorio("Nome".concat(s), usuarios[i], "Data de Criação".concat(s));
 			commits[i] = new Commit("Autor".concat(s), i, "Descricao".concat(s), usuarios[i], "Data de Envio".concat(s));
 			issues[i] = new Issue("Nome".concat(s), i, "Descricao".concat(s), "Status".concat(s), usuarios[i]);
 		}
 		nUsuarios = nProjetos = nRepositorios = nCommits = nIssues = 10;
-=======
-			repositorios[i] = new Repositorio("Nome".concat(s), "Usuario".concat(s), "Data de Criação".concat(s));
-			commits[i] = new Commit("Autor".concat(s), "Data de Envio".concat(s));
-			issues[i] = new Issue("Status".concat(s), "Responsavel".concat(s));
-		}
->>>>>>> main
 	}
 }
