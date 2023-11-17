@@ -13,18 +13,13 @@ public class Dados {
 	private int nCommits = 0;
 	private Issue[] issues;
 	private int nIssues = 0;
-	private ItemControle[] itensControles; 
-	private int nItensControles = 0;
-	
+
 	public Dados() {
 		usuarios = new Usuario[100];
 		repositorios = new Repositorio[100];
 		projetos = new Projeto[100];
 		commits = new Commit[100];
 		issues = new Issue[100];
-		itensControles = new ItemControle[100];
-		
-		
 	}
 
 	// Usuario
@@ -125,40 +120,6 @@ public class Dados {
 		this.nProjetos = nProjetos;
 	}
 
-	//ItemControle
-	
-	public ItemControle[] getItensControles() {
-		return itensControles;
-	}
-
-	public ItemControle getItensControles(int i) {
-		return itensControles[i];
-	}
-
-	public String[] getNomeItensControles() {
-		String[] s = new String[nItensControles];
-		for(int i = 0; i < nItensControles; i++) {
-			s[i] = itensControles[i].getNome();
-		}
-		return s;
-	}
-
-	public void setItensControles(ItemControle[] itensControles) {
-		this.itensControles = itensControles;
-	}
-
-	public void setItensControles(int i, ItemControle c) {
-		itensControles[i] = c;
-	}
-
-	public int getnItensControles() {
-		return nItensControles;
-	}
-
-	public void setnItensControles(int nItensControles) {
-		this.nItensControles = nItensControles;
-	}
-	
 	// Commit
 	public Commit[] getCommits() {
 		return commits;
@@ -230,9 +191,9 @@ public class Dados {
 			String s = String.valueOf(i);
 			usuarios[i] = new Usuario("Nome".concat(s), "email".concat(s), "senha".concat(s));
 			projetos[i] = new Projeto("Nome".concat(s));
-			repositorios[i] = new Repositorio("Nome".concat(s), "Data de Criação".concat(s));
-			commits[i] = new Commit("Nome".concat(s), i, "Descricao".concat(s), "Data de Envio".concat(s));
-			issues[i] = new Issue("Nome".concat(s), i, "Descricao".concat(s), "Status".concat(s));
+			repositorios[i] = new Repositorio("Nome".concat(s), usuarios[i], "Data de Criação".concat(s));
+			commits[i] = new Commit("Autor".concat(s), i, "Descricao".concat(s), usuarios[i], "Data de Envio".concat(s));
+			issues[i] = new Issue("Nome".concat(s), i, "Descricao".concat(s), "Status".concat(s), usuarios[i]);
 		}
 		nUsuarios = nProjetos = nRepositorios = nCommits = nIssues = 10;
 	}

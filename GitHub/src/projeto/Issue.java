@@ -18,9 +18,6 @@ public class Issue extends ItemControle{
 	}
 
 	public String toString() {
-		return "Nome: " + nome + ", " +
-		"Id: " + id + ", " +
-		"Descrição: " + descricao + ", " +
-		"Status: " + status; 
+		return "Status: " + status; 
 	}
 }
