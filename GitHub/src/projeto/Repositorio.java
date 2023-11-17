@@ -52,10 +52,6 @@ public class Repositorio {
 		this.numItensControles = numItensControles;
 	}
 	
-	public String toString() {
-		return "Nome: " + nome + ", Data de criação: " + dtCriacao;
-	}
-	
 	public boolean addItemControle(ItemControle ic) {
 		if(numItensControles < 100) {
 			listaItensControles[numItensControles] = ic; 
@@ -76,6 +72,10 @@ public class Repositorio {
 			}
 		}
 			return saida;
+	}
+	
+	public String toString() {
+		return "Nome: " + nome + ", Data de criação: " + dtCriacao;
 	}
 }
 	
