@@ -466,6 +466,5 @@ public class Main {
 		/* Descomente a linha a seguir para ver a listagem dos alunos em interface gráfica
 		 * new TelaListagem(d.getNomeAlunos());
 		 */
-	}
-	
+	}	
 }
