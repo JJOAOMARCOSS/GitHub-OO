@@ -4,14 +4,14 @@ public class Usuario {
 	private String nome;
 	private String email;
 	private String senha;
-	private Projeto[] listaProjetos = new Projeto [100];
-	private int numProjetos;
+	private Repositorio[] listaRepositorios = new Repositorio [100];
+	private int numRepositorios;
 	
 	public Usuario(String nome, String email, String senha) {
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
-		numProjetos = 0;
+		numRepositorios = 0;
 	}
 
 	public String getNome() {
@@ -38,52 +38,58 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public Projeto[] getListaProjetos() {
-		return this.listaProjetos;
+	
+	public Repositorio[] getListaRepositorios() {
+		return this.listaRepositorios;
 	}
 
-	public void setArrayListaProjetos(Projeto[] p) {
-		this.listaProjetos = p;
+	public void setArrayListaRepositorios(Repositorio[] r) {
+		this.listaRepositorios = r;
 	}
 	
-	public Projeto getProjeto(int i) {
-		return listaProjetos[i];//.getProjeto()
+	public Repositorio getRepositorio(int i) { 
+		return listaRepositorios[i];
 	}
 	
-	public void setProjeto(Projeto projs, int i) {
-		this.listaProjetos[i] = projs;
+	public void setArrayRepositorio(Repositorio repo, int i) {
+		this.listaRepositorios[i] = repo;
+	}
+	
+	public void setRepositorio(Repositorio repo, int i) {
+		this.listaRepositorios[i] = repo;
 	}
 
-	public int getNumProjetos() {
-		return numProjetos;
+	public int getNumRepositorios() {
+		return numRepositorios;
 	}
 
-	public void setNumProjetos(int numProjetos) {
-		this.numProjetos = numProjetos;
+	public void setNumRepositorios(int numRepositorios) {
+		this.numRepositorios = numRepositorios;
 	}
 	
-	public String toString() {
-		return "Usuario: " + nome + ", Email: " + email + ", Senha: " + senha;
-	}
-	
-	public boolean addprojeto(Projeto p) {
-		if(numProjetos < 100) {
-			listaProjetos[numProjetos] = p;
-			numProjetos++;
+	public boolean addrepositorio(Repositorio r) {
+		if(numRepositorios < 100) {
+			listaRepositorios[numRepositorios] = r;
+			numRepositorios++;
 			return true;
 		} else {
 			return false;
 		}
 	}
-	
-	public Projeto buscaProjeto(String nomeProjeto) {
-		Projeto saida = null;
-		for(int i = 0; i < numProjetos; i++) {
-			if(saida.getNome().compareToIgnoreCase(nomeProjeto) == 0) {
-				saida = listaProjetos[i];
+	public Repositorio buscaRepositorio(String nomeRepositorio) {
+		Repositorio saida = null;
+		for(int i = 0; i < numRepositorios; i++) {
+			if(saida.getNome().compareToIgnoreCase(nomeRepositorio) == 0) {
+				saida = listaRepositorios[i];
+			}
+		} 
+			return saida;
 		}
+	
+	public String toString() {
+		return "Usuario: " + nome + ", Email: " + email + ", Senha: " + senha;
 	}
-		return saida;
-	}
+	
+
 	
 	}

@@ -28,23 +28,19 @@ public class Main {
 						opSecundaria = in.nextInt();
 						switch (opSecundaria) {
 							case 1:
-								System.out.println("\n");
 								cadastrarUsuario();
 								break;
 							case 2:
-								System.out.println("\n");
 								removerUsuario();
 								break;
 							case 3:
 								System.out.println("Escolha um dos Usuarios a seguir para editar as informações:\n");
 								listarUsuarios();
 								aux = in.nextInt();
-								System.out.println("\n");
 								Usuario u = lerDadosUsuario();
 								editar(aux, u);
 								break;
 							case 4:
-								System.out.println("\n");
 								listarUsuarios();
 								break;
 							default:
@@ -55,70 +51,54 @@ public class Main {
 				break;
 				case 2:
 					do {
-						System.out.println("\n");
 						System.out.print(imprimirMenuRepositorio());
 						opSecundaria = in.nextInt();
 						switch (opSecundaria) {
-							case 0:
-								System.out.println("\n");
-								break;
 							case 1:
-								System.out.println("\n");
 								cadastrarRepositorio();
 								break;
 							case 2:
-								System.out.println("\n");
 								removerRepositorio();
 								break;
 							case 3:
-								System.out.println("\nEscolha um dos Repositorios a seguir para editar as informações:\n");
+								System.out.println("Escolha um dos Repositorios a seguir para editar as informações:\n");
 								listarRepositorios();
 								aux = in.nextInt();
-								System.out.println("\n");
 								Repositorio r = lerDadosRepositorio();
 								editar(aux, r);
 								break;
 							case 4:
-								System.out.println("\n");
 								listarRepositorios();
 								break;
 							case 5:
-								System.out.println("\n");
 								cadastrarCommit();
 								break;
 							case 6:
-								System.out.println("\n");
 								removerCommit();
 								break;
 							case 7:
-								System.out.println("\nEscolha um dos Commits a seguir para editar as informações:\n");
+								System.out.println("Escolha um dos Commits a seguir para editar as informações:\n");
 								listarCommits();
 								aux = in.nextInt();
-								System.out.println("\n");
 								Commit c = lerDadosCommit();
 								editar(aux, c);
 								break;
 							case 8:
-								System.out.println("\n");
 								listarCommits();
 								break;
 							case 9:
-								System.out.println("\n");
 								cadastrarIssue();
 								break;
 							case 10:
-								System.out.println("\n");
 								removerIssue();
 							case 11:
-								System.out.println("\nEscolha um dos Issues a seguir para editar as informações:\n");
+								System.out.println("Escolha um dos Issues a seguir para editar as informações:\n");
 								listarIssues();
 								aux = in.nextInt();
-								System.out.println("\n");
 								Issue iss = lerDadosIssue();
 								editar(aux, iss);
 								break;
 							case 12:
-								System.out.println("\n");
 								listarIssues();
 								break;
 							default:
@@ -129,34 +109,33 @@ public class Main {
 					break;
 				case 3:
 					do {
-						System.out.println("\nFuncionalidade Retirada do Sistema!\n");
-						break;	
-						////////
-						// Caso queira desfazer o comentário e retirar as barras, é só selecionar tudo que está comentado
-						// e apertar "Ctrl + /" :)
-						///////
-//						System.out.print(imprimirMenuProjeto());
-//						opSecundaria = in.nextInt();
-//						switch (opSecundaria) {
-//							case 1:
-//								cadastrarProjeto();
-//								break;
-//							case 2:
-//								removerProjeto();
-//								break;
-//							case 3:
-//								System.out.println("Escolha um dos Projetos a seguir para editar as informações:\n");
-//								listarProjetos();
-//								aux = in.nextInt();
-//								Projeto p = lerDadosProjeto();
-//								editar(aux, p);
-//								break;
-//							case 4:
-//								listarProjetos();
-//							default:
-//								System.out.println("\nOpção Invalida!\n");
-//								break;
-//						}
+						System.out.println("\nOpção Invalida!\n");
+						break;
+						
+						/*
+						System.out.print(imprimirMenuProjeto());
+						opSecundaria = in.nextInt();
+						switch (opSecundaria) {
+							case 1:
+								cadastrarProjeto();
+								break;
+							case 2:
+								removerProjeto();
+								break;
+							case 3:
+								System.out.println("Escolha um dos Projetos a seguir para editar as informações:\n");
+								listarProjetos();
+								aux = in.nextInt();
+								Projeto p = lerDadosProjeto();
+								editar(aux, p);
+								break;
+							case 4:
+								listarProjetos();
+							default:
+								System.out.println("\nOpção Invalida!\n");
+								break;
+						}
+						*/
 						
 					} while (opSecundaria != 0);
 					break;
@@ -168,10 +147,6 @@ public class Main {
 		}
 		in.close();
 	}
-	
-	/////////////
-	//Menus
-	/////////////
 	public static String imprimirMenu() {
 		String saida = new String("Bem vindo ao Menu GitHub! \nEscolha uma das opçoes a seguir:\n");
 		saida = saida + "00 - Sair da aplicação\n";
@@ -218,10 +193,6 @@ public class Main {
 		saida = saida + "04 - Listar projetos\n";
 		return saida;
 	}
-	
-	/////////////
-	//Usuario
-	/////////////
 	
 	public static boolean cadastrarUsuario() {
 		Usuario u = lerDadosUsuario();
@@ -443,30 +414,16 @@ public class Main {
 		int id;
 		String descricao;
 		String dtEnvio;
-		
-		in.nextLine(); //Limpa o buffer
-		
+		in.nextLine(); //esvazia dados do teclado
 		System.out.println("Digite o nome do Commit: ");
 		nome = in.nextLine();
-		
-		while (true) {
-            System.out.println("Digite o ID: ");
-            if (in.hasNextInt()) {
-                id = in.nextInt();
-                in.nextLine(); // Limpa o buffer
-                break; // Sai do loop se um número inteiro válido for fornecido
-            } else {
-                System.out.println("Por favor, digite um valor numérico para o ID.");
-                in.nextLine(); // Limpa o buffer
-            }
-        }
-		
+		System.out.println("Digite o ID: ");
+		id = in.nextInt();
+		in.nextLine();
 		System.out.println("Digite a Descrição: ");
 		descricao = in.nextLine();
-		
 		System.out.println("Digite a data de envio do Commit: ");
 		dtEnvio = in.nextLine();
-		
 		Commit c = new Commit(nome, id, descricao, dtEnvio);
 		return c;	
 	}
@@ -509,9 +466,9 @@ public class Main {
 		 */
 	}
 	
-	/////////////
-	//Issue
-	/////////////
+/////////////
+//Issue
+/////////////
 	
 	public static boolean cadastrarIssue() {
 		Issue i = lerDadosIssue();

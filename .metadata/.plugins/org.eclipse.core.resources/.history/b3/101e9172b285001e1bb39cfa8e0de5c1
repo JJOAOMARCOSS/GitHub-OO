@@ -28,23 +28,19 @@ public class Main {
 						opSecundaria = in.nextInt();
 						switch (opSecundaria) {
 							case 1:
-								System.out.println("\n");
 								cadastrarUsuario();
 								break;
 							case 2:
-								System.out.println("\n");
 								removerUsuario();
 								break;
 							case 3:
 								System.out.println("Escolha um dos Usuarios a seguir para editar as informações:\n");
 								listarUsuarios();
 								aux = in.nextInt();
-								System.out.println("\n");
 								Usuario u = lerDadosUsuario();
 								editar(aux, u);
 								break;
 							case 4:
-								System.out.println("\n");
 								listarUsuarios();
 								break;
 							default:
@@ -74,7 +70,6 @@ public class Main {
 								System.out.println("\nEscolha um dos Repositorios a seguir para editar as informações:\n");
 								listarRepositorios();
 								aux = in.nextInt();
-								System.out.println("\n");
 								Repositorio r = lerDadosRepositorio();
 								editar(aux, r);
 								break;
@@ -113,7 +108,6 @@ public class Main {
 								System.out.println("\nEscolha um dos Issues a seguir para editar as informações:\n");
 								listarIssues();
 								aux = in.nextInt();
-								System.out.println("\n");
 								Issue iss = lerDadosIssue();
 								editar(aux, iss);
 								break;

@@ -32,7 +32,6 @@ public class Main {
 								cadastrarUsuario();
 								break;
 							case 2:
-								System.out.println("\n");
 								removerUsuario();
 								break;
 							case 3:

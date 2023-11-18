@@ -7,6 +7,8 @@ public class Dados {
 	private int nUsuarios = 0;
 	private Repositorio[] repositorios;
 	private int nRepositorios = 0;
+	private Projeto[] projetos;
+	private int nProjetos = 0;
 	private Commit[] commits;
 	private int nCommits = 0;
 	private Issue[] issues;
@@ -17,6 +19,7 @@ public class Dados {
 	public Dados() {
 		usuarios = new Usuario[100];
 		repositorios = new Repositorio[100];
+		projetos = new Projeto[100];
 		commits = new Commit[100];
 		issues = new Issue[100];
 		itensControles = new ItemControle[100];
@@ -89,8 +92,39 @@ public class Dados {
 		this.nRepositorios = nRepositorios;
 	}
 
-	// Falecido Projeto
-	
+	// Projeto
+	public Projeto[] getProjetos() {
+		return projetos;
+	}
+
+	public Projeto getProjeto(int i) {
+		return projetos[i];
+	}
+
+	public String[] getNomeProjetos() {
+		String[] s = new String[nProjetos];
+		for(int i = 0; i < nProjetos; i++) {
+			s[i] = projetos[i].getNome();
+		}
+		return s;
+	}
+
+	public void setProjetos(Projeto[] projetos) {
+		this.projetos = projetos;
+	}
+
+	public void setProjeto(int i, Projeto p) {
+		projetos[i] = p;
+	}
+
+	public int getnProjetos() {
+		return nProjetos;
+	}
+
+	public void setnProjetos(int nProjetos) {
+		this.nProjetos = nProjetos;
+	}
+
 	//ItemControle
 	
 	public ItemControle[] getItensControles() {
@@ -195,10 +229,11 @@ public class Dados {
 		for(int i = 0; i < 10; i++) {
 			String s = String.valueOf(i);
 			usuarios[i] = new Usuario("Nome".concat(s), "email".concat(s), "senha".concat(s));
+			projetos[i] = new Projeto("Nome".concat(s));
 			repositorios[i] = new Repositorio("Nome".concat(s), "Data de Criação".concat(s));
 			commits[i] = new Commit("Nome".concat(s), i, "Descricao".concat(s), "Data de Envio".concat(s));
 			issues[i] = new Issue("Nome".concat(s), i, "Descricao".concat(s), "Status".concat(s));
 		}
-		nUsuarios = nRepositorios = nCommits = nIssues = 10;
+		nUsuarios = nProjetos = nRepositorios = nCommits = nIssues = 10;
 	}
 }

@@ -28,11 +28,9 @@ public class Main {
 						opSecundaria = in.nextInt();
 						switch (opSecundaria) {
 							case 1:
-								System.out.println("\n");
 								cadastrarUsuario();
 								break;
 							case 2:
-								System.out.println("\n");
 								removerUsuario();
 								break;
 							case 3:
