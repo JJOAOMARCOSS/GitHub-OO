@@ -1,5 +1,8 @@
 package dados;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import projeto.*;
 
 public class Dados {
@@ -13,6 +16,8 @@ public class Dados {
 	private int nIssues = 0;
 	private ItemControle[] itensControles; 
 	private int nItensControles = 0;
+	private Map<Repositorio, Usuario> mapaRepositoriosUsuarios;
+
 	
 	public Dados() {
 		usuarios = new Usuario[100];
@@ -20,8 +25,7 @@ public class Dados {
 		commits = new Commit[100];
 		issues = new Issue[100];
 		itensControles = new ItemControle[100];
-		
-		
+		mapaRepositoriosUsuarios = new HashMap<>();
 	}
 
 	// Usuario
@@ -191,7 +195,36 @@ public class Dados {
 		this.nIssues = nIssues;
 	}
 	
+	public Map<Repositorio, Usuario> getMapaRepositoriosUsuarios() {
+	    return mapaRepositoriosUsuarios;
+	}
+
+	
 	public void preencherDados() {
+		/*
+		 // Usuários
+	    usuarios[0] = new Usuario("João", "joao@email.com", "senha123");
+	    usuarios[1] = new Usuario("Maria", "maria@email.com", "senha456");
+	    // Adicione mais usuários conforme necessário
+
+	    // Repositórios
+	    repositorios[0] = new Repositorio("Projeto A", "2023-01-01");
+	    repositorios[1] = new Repositorio("Projeto B", "2023-02-01");
+	    // Adicione mais repositórios conforme necessário
+
+	    // Commits
+	    commits[0] = new Commit("Versão 1.0", 1, "Primeira versão", "2023-01-10");
+	    commits[1] = new Commit("Correção de bugs", 2, "Corrigido bug de segurança", "2023-01-15");
+	    // Adicione mais commits conforme necessário
+
+	    // Issues
+	    issues[0] = new Issue("Bug no sistema", 1, "Erro ao fazer login", "Aberta");
+	    issues[1] = new Issue("Melhoria na interface", 2, "Adicionar novos ícones", "Em andamento");
+	    // Adicione mais issues conforme necessário
+
+	    nUsuarios = nRepositorios = nCommits = nIssues = 2; // Atualize conforme a quantidade real de dados inseridos
+	}
+	*/
 		for(int i = 0; i < 10; i++) {
 			String s = String.valueOf(i);
 			usuarios[i] = new Usuario("Nome".concat(s), "email".concat(s), "senha".concat(s));
@@ -201,4 +234,5 @@ public class Dados {
 		}
 		nUsuarios = nRepositorios = nCommits = nIssues = 10;
 	}
+	
 }

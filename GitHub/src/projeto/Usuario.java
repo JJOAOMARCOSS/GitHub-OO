@@ -76,20 +76,38 @@ public class Usuario {
 			return false;
 		}
 	}
+	
 	public Repositorio buscaRepositorio(String nomeRepositorio) {
-		Repositorio saida = null;
-		for(int i = 0; i < numRepositorios; i++) {
-			if(saida.getNome().compareToIgnoreCase(nomeRepositorio) == 0) {
-				saida = listaRepositorios[i];
-			}
-		} 
-			return saida;
-		}
+
+        Repositorio repositorioAchado = null; //saida
+        Repositorio repositorioParaComparar;
+
+        for(int i = 0; i < numRepositorios; i++) {
+            repositorioParaComparar = listaRepositorios[i];
+            if(repositorioParaComparar.getNome().compareToIgnoreCase(nomeRepositorio) == 0) {
+                repositorioAchado = repositorioParaComparar;
+                break;
+            }
+        }
+
+        return repositorioAchado; //saida
+    }
+
+    /*
+    //Buscar repositorio por data
+
+    public Repositorio buscaData(String dtCriacao) {
+        Repositorio saida = null;
+        for(int i = 0; i < numRepositorios; i++) {
+            if(saida.getNome().compareToIgnoreCase(dtCriacao) == 0) {
+                saida = listaRepositorios[i];
+            }
+        } 
+            return saida;
+        }*/
 	
 	public String toString() {
 		return "Usuario: " + nome + ", Email: " + email + ", Senha: " + senha;
 	}
-	
-
 	
 	}

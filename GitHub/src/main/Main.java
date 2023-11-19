@@ -1,5 +1,8 @@
 package main;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import java.util.*;
 import projeto.*;
 import view.*;
@@ -9,12 +12,14 @@ public class Main {
 	
 	private static Dados d = new Dados();
 	private static Scanner in = new Scanner(System.in);
+	private static Map<Repositorio, Usuario> mapaRepositoriosUsuarios = new HashMap<>();
 	
 	public static void main(String[] args) {
 		int op = -1;
 		int opSecundaria = -1;
 		int aux;
 		d.preencherDados();
+		
 		while(op != 0) {
 			System.out.print(imprimirMenu());
 			op = in.nextInt();
@@ -24,19 +29,22 @@ public class Main {
 					break;
 				case 1:
 					do {
-						System.out.print(imprimirMenuAluno());
+						System.out.print(imprimirMenuUsuario());
 						opSecundaria = in.nextInt();
 						switch (opSecundaria) {
+							case 0:
+								//Voltar para o Menu
+							break;
 							case 1:
-								System.out.println("\n");
 								cadastrarUsuario();
+								System.out.println("\n");
 								break;
 							case 2:
-								System.out.println("\n");
 								removerUsuario();
+								System.out.println("\n");
 								break;
 							case 3:
-								System.out.println("Escolha um dos Usuarios a seguir para editar as informações:\n");
+								System.out.println("Escolha um dos Usuarios a seguir para editar as informacoes:\n");
 								listarUsuarios();
 								aux = in.nextInt();
 								System.out.println("\n");
@@ -44,9 +52,51 @@ public class Main {
 								editar(aux, u);
 								break;
 							case 4:
-								System.out.println("\n");
 								listarUsuarios();
-								break;
+								System.out.println("Deseja olhar o Repositorio de algum Usuario? \n");
+								do {
+									System.out.print(imprimirMenuUsuarioRep());
+									opSecundaria = in.nextInt();
+									switch (opSecundaria) {
+									case 0:
+										//Voltar para o Menu Usuario
+									break;
+									case 1:
+										listarRepositoriosUsuario();
+										do {
+											System.out.println("\n");
+											System.out.print(imprimirMenuRepositorio());
+											opSecundaria = in.nextInt();
+											switch (opSecundaria) {
+												case 0:
+													System.out.println("\n");
+													break;
+												case 1:
+													System.out.println("\n");
+													cadastrarRepositorio();
+													break;
+												case 2:
+													System.out.println("\n");
+													removerRepositorio();
+													break;
+												case 3:
+													System.out.println("\nEscolha um dos Repositorios a seguir para editar as informações:\n");
+													listarRepositorios();
+													aux = in.nextInt();
+													System.out.println("\n");
+													Repositorio r = lerDadosRepositorio();
+													editar(aux, r);
+													break;
+												case 4:
+													System.out.println("\n");
+													listarRepositorios();
+													break;
+											}
+											} while (opSecundaria != 0);
+									break;
+									}
+								}while (opSecundaria != 0);
+								/**/
 							default:
 								System.out.println("\nOpção Invalida!\n");
 								break;
@@ -84,13 +134,20 @@ public class Main {
 								break;
 							case 5:
 								System.out.println("\n");
-								cadastrarCommit();
+								System.out.println("Insira o Nome para buscar: ");
+								in.nextLine(); // Limpa o buffer
+								String nome = in.nextLine();
+								buscarRepositorio(nome);
 								break;
 							case 6:
 								System.out.println("\n");
-								removerCommit();
+								cadastrarCommit();
 								break;
 							case 7:
+								System.out.println("\n");
+								removerCommit();
+								break;
+							case 8:
 								System.out.println("\nEscolha um dos Commits a seguir para editar as informações:\n");
 								listarCommits();
 								aux = in.nextInt();
@@ -98,18 +155,19 @@ public class Main {
 								Commit c = lerDadosCommit();
 								editar(aux, c);
 								break;
-							case 8:
+							case 9:
 								System.out.println("\n");
 								listarCommits();
 								break;
-							case 9:
+							case 10:
 								System.out.println("\n");
 								cadastrarIssue();
 								break;
-							case 10:
+							case 11:
 								System.out.println("\n");
 								removerIssue();
-							case 11:
+								break;
+							case 12:
 								System.out.println("\nEscolha um dos Issues a seguir para editar as informações:\n");
 								listarIssues();
 								aux = in.nextInt();
@@ -117,7 +175,7 @@ public class Main {
 								Issue iss = lerDadosIssue();
 								editar(aux, iss);
 								break;
-							case 12:
+							case 13:
 								System.out.println("\n");
 								listarIssues();
 								break;
@@ -127,40 +185,6 @@ public class Main {
 						}
 					} while (opSecundaria != 0);
 					break;
-				case 3:
-					do {
-						System.out.println("\nFuncionalidade Retirada do Sistema!\n");
-						break;	
-						////////
-						// Caso queira desfazer o comentário e retirar as barras, é só selecionar tudo que está comentado
-						// e apertar "Ctrl + /" :)
-						///////
-//						System.out.print(imprimirMenuProjeto());
-//						opSecundaria = in.nextInt();
-//						switch (opSecundaria) {
-//							case 1:
-//								cadastrarProjeto();
-//								break;
-//							case 2:
-//								removerProjeto();
-//								break;
-//							case 3:
-//								System.out.println("Escolha um dos Projetos a seguir para editar as informações:\n");
-//								listarProjetos();
-//								aux = in.nextInt();
-//								Projeto p = lerDadosProjeto();
-//								editar(aux, p);
-//								break;
-//							case 4:
-//								listarProjetos();
-//							default:
-//								System.out.println("\nOpção Invalida!\n");
-//								break;
-//						}
-						
-					} while (opSecundaria != 0);
-					break;
-				
 				default:
 					System.out.println("\nOpção Invalida!\n");
 					break;
@@ -181,13 +205,20 @@ public class Main {
 		return saida;
 	}
 
-	public static String imprimirMenuAluno() {
+	public static String imprimirMenuUsuario() {
 		String saida = new String("Escolha uma das opçoes a seguir:\n");
 		saida = saida + "00 - Voltar para o menu\n";
 		saida = saida + "01 - Cadastrar novo Usuario\n";
 		saida = saida + "02 - Remover usuario existente\n";
 		saida = saida + "03 - Editar usuario existente\n";
 		saida = saida + "04 - Listar usuarios\n";
+		return saida;
+	}
+	
+	public static String imprimirMenuUsuarioRep() {
+		String saida = new String("Escolha uma das opçoes a seguir:\n");
+		saida = saida + "00 - Nao, voltar para o menu\n";
+		saida = saida + "01 - Sim\n";
 		return saida;
 	}
 
@@ -198,14 +229,15 @@ public class Main {
 		saida = saida + "02 - Remover repositorio existente\n";
 		saida = saida + "03 - Editar repositorio existente\n";
 		saida = saida + "04 - Listar repositorios\n";
-		saida = saida + "05 - Cadastrar novo Commit\n";
-		saida = saida + "06 - Remover commit existente\n";
-		saida = saida + "07 - Editar commit existente\n";
-		saida = saida + "08 - Listar commits\n";
-		saida = saida + "09 - Cadastrar novo Issue\n";
-		saida = saida + "10 - Remover projeto issue\n";
-		saida = saida + "11 - Editar projeto issue\n";
-		saida = saida + "12 - Listar issues\n";
+		saida = saida + "05 - Buscar Repositorio\n";
+        saida = saida + "06 - Cadastrar novo Commit\n";
+        saida = saida + "07 - Remover commit existente\n";
+        saida = saida + "08 - Editar commit existente\n";
+        saida = saida + "09 - Listar commits\n";
+        saida = saida + "10 - Cadastrar novo Issue\n";
+        saida = saida + "11 - Remover projeto issue\n";
+        saida = saida + "12 - Editar projeto issue\n";
+        saida = saida + "13 - Listar issues\n";
 		return saida;
 	}
 
@@ -289,76 +321,50 @@ public class Main {
 		 */
 	}
 	
-	////////
-	// Caso queira desfazer o comentário e retirar as barras, é só selecionar tudo que está comentado
-	// e apertar "Ctrl + /" :)
-	///////
+	private static void buscarRepositorio(String nome) {
+        //Busca Dentro do Usuário
+
+        /*for(int i = 0; i < d.getnUsuarios(); i++) {
+            if(d.getUsuarios()[i].buscaRepositorio(nome)!= null){
+                System.out.println(d.getUsuarios()[i].buscaRepositorio(nome).toString());
+            }
+        }
+        */
+
+        //Dentro do Dados
+        for(int i = 0; i < d.getnRepositorios(); i++) {
+            if(d.getRepositorios()[i].getNome().compareToIgnoreCase(nome) == 0) {
+                System.out.println(d.getRepositorios()[i].toString());
+            }
+        }
+
+    }
 	
-//	public static boolean cadastrarProjeto() {
-//		Projeto p = lerDadosProjeto();
-//		if(d.getnProjetos() < 100) {
-//			d.setProjeto(d.getnProjetos(), p);
-//			d.setnProjetos(d.getnProjetos()+1);
-//			System.out.println("Projeto cadastrado com sucesso!\n");
-//			return true;
-//		} else {
-//			System.out.println("Não foi possivel cadastrar o projeto!\n");
-//			return false;
-//		}
-//	}
-//	
-//	public static Projeto lerDadosProjeto() {
-//		String nome;
-//		in.nextLine(); //esvazia dados do teclado
-//		System.out.println("Digite o nome do Projeto: ");
-//		nome = in.nextLine();
-//		Projeto p = new Projeto(nome);
-//		return p;	
-//	}
-//	
-//	public static void removerProjeto() {
-//		System.out.println("Escolha um dos projetos a seguir para ser removido:\n");
-//		listarProjetos();
-//		int i = in.nextInt();
-//		if(i < d.getnProjetos() && i > 0) {
-//			swapListaProjetos(i);
-//			d.setProjeto(d.getnProjetos(), null);
-//			d.setnProjetos(d.getnProjetos() - 1);
-//			System.out.println("Projeto removido com sucesso");
-//		} else {
-//			System.out.println("Voce escolheu um numero invalido!");
-//		}
-//		
-//	}
-//	
-//	public static void swapListaProjetos(int p) {
-//		for(int i = p; i < d.getnProjetos() - 1; i++) 
-//			d.setProjeto(i, d.getProjeto(i+1));
-//	}
-//	
-//	public static void editar(int i, Projeto p) {
-//		if(i < d.getnProjetos() && i >= 0) {
-//			d.setProjeto(i, p);
-//			System.out.println("Dados editados com sucesso");
-//		} else {
-//			System.out.println("Voce escolheu um numero invalido!");
-//		}
-//	}
-//	
-//	public static void listarProjetos() {
-//		in.nextLine(); //esvazia dados do teclado
-//		for(int i = 0; i < d.getnProjetos(); i++) 
-//			System.out.println(i + " -> " + d.getProjetos()[i].toString());
-//		/* Descomente a linha a seguir para ver a listagem dos alunos em interface gráfica
-//		 * new TelaListagem(d.getNomeAlunos());
-//		 */
-//	}
-//	
+	public static void listarRepositoriosUsuario() {
+	    listarUsuarios();
+	    System.out.println("Escolha um dos usuários para listar os repositórios:\n");
+	    int usuarioSelecionado = in.nextInt();
+	    in.nextLine(); // Limpa o buffer
+	    if (usuarioSelecionado >= 0 && usuarioSelecionado < d.getnUsuarios()) {
+	        Usuario usuario = d.getUsuarios()[usuarioSelecionado];
+	        System.out.println("Repositórios do usuário " + usuario.getNome() + ":");
+	        for (Map.Entry<Repositorio, Usuario> entry : mapaRepositoriosUsuarios.entrySet()) {
+	            if (entry.getValue().equals(usuario)) {
+	                System.out.println(entry.getKey().toString());
+	            }else {
+	            	System.out.println("NAda\n");
+	            }
+	        }
+	    } else {
+	        System.out.println("Opção inválida!");
+	    }
+	}
+	
 	/////////////
 	//Repositorio
 	/////////////
 	
-	public static boolean cadastrarRepositorio() {
+	/*public static boolean cadastrarRepositorio() {
 		Repositorio r = lerDadosRepositorio();
 		if(d.getnRepositorios() < 100) {
 			d.setRepositorio(d.getnRepositorios(), r);
@@ -369,6 +375,40 @@ public class Main {
 			System.out.println("Não foi possivel cadastrar o Repositorio!\n");
 			return false;
 		}
+	}*/
+	
+	private static Usuario escolherUsuario() {
+	    System.out.println("Escolha um usuário:");
+
+	    // Listar usuários disponíveis
+	    listarUsuarios();
+
+	    // Solicitar a escolha do usuário
+	    int escolha = in.nextInt();
+	    in.nextLine(); // Limpar o buffer
+
+	    // Verificar se a escolha é válida
+	    if (escolha >= 0 && escolha < d.getnUsuarios()) {
+	        return d.getUsuarios()[escolha];
+	    } else {
+	        System.out.println("Escolha inválida. Retornando null.");
+	        return null;
+	    }
+	}
+	
+	public static boolean cadastrarRepositorio() {
+	    Repositorio r = lerDadosRepositorio();
+	    Usuario u = escolherUsuario(); // Adapte conforme necessário
+	    if (d.getnRepositorios() < 100) {
+	        d.setRepositorio(d.getnRepositorios(), r);
+	        d.setnRepositorios(d.getnRepositorios() + 1);
+	        mapaRepositoriosUsuarios.put(r, u); // Mapeia o repositório para o usuário
+	        System.out.println("Repositorio cadastrado com sucesso!\n");
+	        return true;
+	    } else {
+	        System.out.println("Não foi possivel cadastrar o Repositorio!\n");
+	        return false;
+	    }
 	}
 	
 	public static Repositorio lerDadosRepositorio() {

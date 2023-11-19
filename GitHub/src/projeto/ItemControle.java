@@ -112,26 +112,10 @@ public abstract class ItemControle {
             return false;
         }
     }
-	
-    public Commit buscaCommit(String nomeCommit) {
-		Commit saida = null;
-		for(int i = 0; i < numCommits; i++) {
-			if(saida.getNome().compareToIgnoreCase(nomeCommit) == 0) {
-				saida = listaCommits[i];
-		}
-	}
-		return saida;
-	}
+	//Buscar Commit Nome
+    //Buscar Issue Nome 
+    //Buscar Issue Data
     
-    public Issue buscaIssue(String nomeIssue) {
-		Issue saida = null;
-		for(int i = 0; i < numIssues; i++) {
-			if(saida.getNome().compareToIgnoreCase(nomeIssue) == 0) {
-				saida = listaIssues[i];
-		}
-	}
-		return saida;
-	}
     
 	public String toString() {
 		return "Nome: " + nome + ", ID: " + id + ", Descrição: " + descricao;
