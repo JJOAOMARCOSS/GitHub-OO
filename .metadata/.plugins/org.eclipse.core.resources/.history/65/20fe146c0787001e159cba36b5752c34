@@ -1,0 +1,108 @@
+package negocio;
+
+import projeto.Commit;
+import projeto.Issue;
+import projeto.Repositorio;
+
+public class Repositorio {
+    private String nome;
+
+    public Repositorio(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+}
+
+
+
+
+/////////////////////////
+/*case 2:
+	do {
+		System.out.println("\n");
+		System.out.print(imprimirMenuRepositorio());
+		opSecundaria = in.nextInt();
+		switch (opSecundaria) {
+			case 0:
+				System.out.println("\n");
+				break;
+			case 1:
+				System.out.println("\n");
+				cadastrarRepositorio();
+				break;
+			case 2:
+				System.out.println("\n");
+				removerRepositorio();
+				break;
+			case 3:
+				System.out.println("\nEscolha um dos Repositorios a seguir para editar as informações:\n");
+				listarRepositorios();
+				aux = in.nextInt();
+				System.out.println("\n");
+				Repositorio r = lerDadosRepositorio();
+				editar(aux, r);
+				break;
+			case 4:
+				System.out.println("\n");
+				listarRepositorios();
+				break;
+			case 5:
+				System.out.println("\n");
+				System.out.println("Insira o Nome para buscar: ");
+				in.nextLine(); // Limpa o buffer
+				String nome = in.nextLine();
+				buscarRepositorio(nome);
+				break;
+			case 6:
+				System.out.println("\n");
+				cadastrarCommit();
+				break;
+			case 7:
+				System.out.println("\n");
+				removerCommit();
+				break;
+			case 8:
+				System.out.println("\nEscolha um dos Commits a seguir para editar as informacoes:\n");
+				listarCommits();
+				aux = in.nextInt();
+				System.out.println("\n");
+				Commit c = lerDadosCommit();
+				editar(aux, c);
+				break;
+			case 9:
+				System.out.println("\n");
+				listarCommits();
+				break;
+			case 10:
+				System.out.println("\n");
+				cadastrarIssue();
+				break;
+			case 11:
+				System.out.println("\n");
+				removerIssue();
+				break;
+			case 12:
+				System.out.println("\nEscolha um dos Issues a seguir para editar as informacoes:\n");
+				listarIssues();
+				aux = in.nextInt();
+				System.out.println("\n");
+				Issue iss = lerDadosIssue();
+				editar(aux, iss);
+				break;
+			case 13:
+				System.out.println("\n");
+				listarIssues();
+				break;
+			default:
+				System.out.println("\nOpção Invalida!\n");
+				break;
+		}
+	} while (opSecundaria != 0);
+	break;
+default:
+	System.out.println("\nOpção Invalida!\n");
+	break;
+}*/

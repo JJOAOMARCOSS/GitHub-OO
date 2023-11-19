@@ -1,0 +1,56 @@
+package negocio;
+
+class Sistema {
+    private Usuario[] usuarios;
+    private int numUsuarios;
+
+    public Sistema() {
+        this.usuarios = new Usuario[100];
+        this.numUsuarios = 0;
+    }
+
+    public Usuario[] getUsuarios() {
+        return usuarios;
+    }
+
+    public void cadastrarUsuario(Usuario usuario) {
+        if (numUsuarios < 100) {
+            usuarios[numUsuarios] = usuario;
+            numUsuarios++;
+        } else {
+            System.out.println("Limite de usuários atingido.");
+        }
+    }
+
+    public void removerUsuario(String nomeUsuario) {
+        for (int i = 0; i < numUsuarios; i++) {
+            if (usuarios[i] != null && usuarios[i].getNome().equals(nomeUsuario)) {
+                // Move os usuários restantes uma posição para frente
+                for (int j = i; j < numUsuarios - 1; j++) {
+                    usuarios[j] = usuarios[j + 1];
+                }
+                usuarios[numUsuarios - 1] = null;
+                numUsuarios--;
+                System.out.println("Usuário removido com sucesso.");
+                return;
+            }
+        }
+        System.out.println("Usuário não encontrado para remoção.");
+    }
+
+    public void listarUsuarios() {
+        System.out.println("Lista de Usuários:");
+        for (int i = 0; i < numUsuarios; i++) {
+            System.out.println(usuarios[i].getNome());
+        }
+    }
+
+    public Usuario buscarUsuario(String nomeUsuario) {
+        for (int i = 0; i < numUsuarios; i++) {
+            if (usuarios[i] != null && usuarios[i].getNome().equals(nomeUsuario)) {
+                return usuarios[i];
+            }
+        }
+        return null;
+    }
+}
