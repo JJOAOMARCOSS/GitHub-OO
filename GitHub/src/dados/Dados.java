@@ -1,6 +1,5 @@
 package dados;
 
-import negocio.Usuario;
 import projeto.*;
 
 public class Dados {

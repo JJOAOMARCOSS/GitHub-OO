@@ -128,7 +128,7 @@ public class Main {
                 	cadastrarRepositorio(usuario);
                     break;
                 case 2:
-                    removerRepositorio();
+                	removerRepositorio(usuario);
                     break;
                 case 3:
                 	System.out.println("Escolha um dos Repositorios a seguir para editar as informacoes:\n");
@@ -300,7 +300,9 @@ public class Main {
 	}
 	
 	public static void removerRepositorio(Usuario usuario) {
-		
+    	System.out.print("Digite o nome do repositório a ser removido: ");
+		String nomeRemoverRepositorio = in.next();
+        d.removerRepositorio(usuario, nomeRemoverRepositorio);
 	}
 	
 	public static void swapListaRepositorios(int r) {
@@ -318,15 +320,14 @@ public class Main {
 	}
 	
 	public static void listarRepositorios(Usuario usuario) {
-		in.nextLine(); //esvazia dados do teclado
-		Repositorio[] repositorios = usuario.getListaRepositorios();
-		for(int i = 0; i < d.getnRepositorios(); i++) {
-			for (Repositorio repositorio: repositorios) {
-				if (repositorio != null) {
-					System.out.println(repositorio.getNome());
-				}
-			}
-		}
+	    in.nextLine(); // Esvazia dados do teclado
+	    Repositorio[] repositorios = usuario.getListaRepositorios();
+
+	    for (Repositorio repositorio : repositorios) {
+	        if (repositorio != null) {
+	            System.out.println(repositorio.getNome());
+	        }
+	    }
 			//System.out.println(i + " -> " + d.getRepositorios()[i].toString());
 		/* Descomente a linha a seguir para ver a listagem dos alunos em interface gráfica
 		 * new TelaListagem(d.getNomeAlunos());
