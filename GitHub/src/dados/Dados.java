@@ -1,5 +1,6 @@
 package dados;
 
+import negocio.Usuario;
 import projeto.*;
 
 public class Dados {
@@ -56,6 +57,15 @@ public class Dados {
 	}
 
 	// Repositorio
+	
+	public void adicionarRepositorio(Usuario usuario, Repositorio repositorio) {
+		usuario.addrepositorio(repositorio);
+	}
+	
+	public void removerRepositorio(Usuario usuario, String nomeRepositorio) {
+        usuario.removerRepositorio(nomeRepositorio);
+    }
+	
 	public Repositorio[] getRepositorios() {
 		return repositorios;
 	}
@@ -198,8 +208,8 @@ public class Dados {
 	        Usuario usuario = new Usuario("Nome".concat(s), "email".concat(s), "senha".concat(s));
 	        usuarios[i] = usuario;
 
-	        Repositorio repositorio = new Repositorio("Nome".concat(s), "Data de Criação".concat(s));
-	        repositorios[i] = repositorio;
+//	        Repositorio repositorio = new Repositorio("Nome".concat(s), "Data de Criação".concat(s));
+//	        repositorios[i] = repositorio;
 
 	        Commit commit = new Commit("Nome".concat(s), i, "Descricao".concat(s), "Data de Envio".concat(s));
 	        commits[i] = commit;
@@ -209,6 +219,6 @@ public class Dados {
 	        
 	    }
 
-	    nUsuarios = nRepositorios = nCommits = nIssues = 10; // Atualize conforme a quantidade real de dados inseridos
+	    nUsuarios = nCommits = nIssues = 10; // Atualize conforme a quantidade real de dados inseridos
 	}
 }

@@ -92,6 +92,22 @@ public class Usuario {
 
         return repositorioAchado; //saida
     }
+	
+	public void removerRepositorio(String nomeRepositorio) {
+        for (int i = 0; i < numRepositorios; i++) {
+            if (listaRepositorios[i] != null && listaRepositorios[i].getNome().equals(nomeRepositorio)) {
+                // Move os repositórios restantes uma posição para frente
+                for (int j = i; j < numRepositorios - 1; j++) {
+                    listaRepositorios[j] = listaRepositorios[j + 1];
+                }
+                listaRepositorios[numRepositorios - 1] = null;
+                numRepositorios--;
+                System.out.println("Repositório removido com sucesso.");
+                return;
+            }
+        }
+        System.out.println("Repositório não encontrado para remoção.");
+    }
 
     /*
     //Buscar repositorio por data
