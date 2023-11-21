@@ -65,6 +65,10 @@ public class Dados {
         usuario.removerRepositorio(nomeRepositorio);
     }
 	
+	public void editarRepositorio(Usuario usuario, int i, Repositorio repositorio) {
+        usuario.editar(i, repositorio);
+    }
+	
 	public Repositorio[] getRepositorios() {
 		return repositorios;
 	}
@@ -96,8 +100,6 @@ public class Dados {
 	public void setnRepositorios(int nRepositorios) {
 		this.nRepositorios = nRepositorios;
 	}
-
-	// Falecido Projeto
 	
 	//ItemControle
 	

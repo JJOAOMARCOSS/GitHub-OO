@@ -75,7 +75,7 @@ public class Repositorio {
 	}
 	
 	public String toString() {
-		return "Nome: " + nome + ", Data de criação: " + dtCriacao;
+		return "Nome: " + nome + ", Data de criacao: " + dtCriacao;
 	}
 }
 	

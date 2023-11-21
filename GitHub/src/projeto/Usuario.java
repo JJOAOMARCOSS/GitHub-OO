@@ -102,13 +102,22 @@ public class Usuario {
                 }
                 listaRepositorios[numRepositorios - 1] = null;
                 numRepositorios--;
-                System.out.println("Repositório removido com sucesso.");
+                System.out.println("Repositorio removido com sucesso.");
                 return;
             }
         }
-        System.out.println("Repositório não encontrado para remoção.");
+        System.out.println("Repositorio não encontrado para remoção.");
     }
 
+	public void editar(int i, Repositorio r) {
+		if(i < getNumRepositorios() && i >= 0) {
+			setRepositorio(r, i);
+			System.out.println("Dados editados com sucesso");
+		} else {
+			System.out.println("Voce escolheu um numero invalido!");
+		}
+	}
+	
     /*
     //Buscar repositorio por data
 

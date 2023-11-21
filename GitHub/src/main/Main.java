@@ -127,7 +127,7 @@ public class Main {
 					aux = in.nextInt();
 					System.out.println("\n");
 					Repositorio r = lerDadosRepositorio();
-					editar(aux, r);
+					editar(usuario, aux, r);
 					break;
                 case 4:
                 	listarRepositorios(usuario);
@@ -152,7 +152,7 @@ public class Main {
     }
 	
 	private static void realizarOperacoesNoRepositorio(Repositorio repositorio, Scanner scanner) {
-        int aux;
+        //int aux;
 
         while (true) {
             System.out.println("\nRepositorio '" + repositorio.getNome() + "':");
@@ -261,15 +261,6 @@ public class Main {
     }
 	
 	
-	public static Repositorio buscarRepositorio(String nomeRepositorio) {
-		for (int i = 0; i < d.getnRepositorios(); i++) {
-	        if (d.getRepositorios()[i] != null && d.getRepositorios()[i].getNome().equals(nomeRepositorio)) {
-	            return d.getRepositorios()[i];
-	        }
-	    }
-	    return null;
-    }
-	
 	/*
 	private static void buscarRepositorio(String nome) {
         //Busca Dentro do Usuário
@@ -318,7 +309,7 @@ public class Main {
 		in.nextLine(); //esvazia dados do teclado
 		System.out.println("Digite o nome do Repositorio: ");
 		nomeRepositorio = in.nextLine();
-		System.out.println("Digite a data de criação do Repositorio: ");
+		System.out.println("Digite a data de criacao do Repositorio: ");
 		dtCriacao = in.nextLine();
 		Repositorio r = new Repositorio(nomeRepositorio, dtCriacao);
 		return r;	
@@ -335,9 +326,9 @@ public class Main {
 			d.setRepositorio(i, d.getRepositorio(i+1));
 	}
 	
-	public static void editar(int i, Repositorio r) {
+	public static void editar(Usuario usuario, int i, Repositorio r) {
 		if(i < d.getnRepositorios() && i >= 0) {
-			d.setRepositorio(i, r);
+			d.editarRepositorio(usuario, i, r);
 			System.out.println("Dados editados com sucesso");
 		} else {
 			System.out.println("Voce escolheu um numero invalido!");
@@ -347,17 +338,25 @@ public class Main {
 	public static void listarRepositorios(Usuario usuario) {
 	    in.nextLine(); // Esvazia dados do teclado
 	    Repositorio[] repositorios = usuario.getListaRepositorios();
+	    int i = 0;
 
 	    for (Repositorio repositorio : repositorios) {
 	        if (repositorio != null) {
-	            System.out.println(repositorio.getNome());
+	        	i++;
+	            System.out.println(i + " -> " + repositorio.toString());
+	        } 
+	    }
+	}
+	
+	public static Repositorio buscarRepositorio(String nomeRepositorio) {
+		for (int i = 0; i < d.getnRepositorios(); i++) {
+	        if (d.getRepositorios()[i] != null && d.getRepositorios()[i].getNome().equals(nomeRepositorio)) {
+	            return d.getRepositorios()[i];
 	        }
 	    }
-			//System.out.println(i + " -> " + d.getRepositorios()[i].toString());
-		/* Descomente a linha a seguir para ver a listagem dos alunos em interface gráfica
-		 * new TelaListagem(d.getNomeAlunos());
-		 */
-	}
+	    return null;
+    }
+	
 	
 	/////////////
 	//Commit
