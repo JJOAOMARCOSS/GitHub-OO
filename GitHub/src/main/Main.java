@@ -127,7 +127,7 @@ public class Main {
 					aux = in.nextInt();
 					System.out.println("\n");
 					Repositorio r = lerDadosRepositorio();
-					editar(usuario, aux, r);
+					editarRepositorio(usuario, aux, r);
 					break;
                 case 4:
                 	listarRepositorios(usuario);
@@ -152,7 +152,7 @@ public class Main {
     }
 	
 	private static void realizarOperacoesNoRepositorio(Repositorio repositorio, Scanner scanner) {
-        //int aux;
+        int aux;
 
         while (true) {
             System.out.println("\nRepositorio '" + repositorio.getNome() + "':");
@@ -173,6 +173,65 @@ public class Main {
             switch (opcaoRepositorio) {
             	case 0:
             		return;
+                case 1:
+                	cadastrarCommit(repositorio);
+                    break;
+                case 2:
+					removerCommit(repositorio);
+                    break;
+                case 3:
+                	System.out.println("Escolha um dos Commits a seguir para editar as informacoes:\n");
+					listarCommit(repositorio);;
+					aux = in.nextInt();
+					System.out.println("\n");
+					Commit c = lerDadosCommit();
+					editarCommit(repositorio, aux, c);
+					break;
+                case 4:
+                	listarCommit(repositorio);
+                    break;
+                case 5:
+                	System.out.println("Digite o nome do commit");
+    			    String nomeAcessarCommit = in.next();
+    			    Repositorio commitSelecionado = buscarRepositorio(nomeAcessarCommit);
+
+    			    if (commitSelecionado != null) {
+    			        System.out.println("Commit encontrado: " + commitSelecionado.getNome());
+    			        realizarOperacoesNoRepositorio(commitSelecionado, in);
+    			    } else {
+    			        System.out.println("Commit não encontrado.");
+    			    }
+                	break;
+                case 6:
+                	cadastrarIssue(repositorio);
+                    break;
+                case 7:
+					removerIssue(repositorio);
+                    break;
+                case 8:
+                	System.out.println("Escolha um dos Issues a seguir para editar as informacoes:\n");
+					listarIssues(repositorio);;
+					aux = in.nextInt();
+					System.out.println("\n");
+					Issue i = lerDadosIssue();
+					editarIssue(repositorio, aux, i);
+					break;
+                case 9:
+                	listarIssues(repositorio);
+                    break;
+                case 10:
+                	System.out.println("Digite o nome do Issue");
+    			    String nomeAcessarIssue = in.next();
+    			    Repositorio issueSelecionado = buscarRepositorio(nomeAcessarIssue);
+
+    			    if (issueSelecionado != null) {
+    			        System.out.println("Issue encontrado: " + issueSelecionado.getNome());
+    			        realizarOperacoesNoRepositorio(issueSelecionado, in);
+    			    } else {
+    			        System.out.println("Issue não encontrado.");
+    			    }
+                	break;
+
             	default:
                     System.out.println("\nOpção Invalida!\n");
                     break;
@@ -326,7 +385,7 @@ public class Main {
 			d.setRepositorio(i, d.getRepositorio(i+1));
 	}
 	
-	public static void editar(Usuario usuario, int i, Repositorio r) {
+	public static void editarRepositorio(Usuario usuario, int i, Repositorio r) {
 		if(i < d.getnRepositorios() && i >= 0) {
 			d.editarRepositorio(usuario, i, r);
 			System.out.println("Dados editados com sucesso");
@@ -362,9 +421,10 @@ public class Main {
 	//Commit
 	/////////////
 	
-	public static boolean cadastrarCommit() {
+	public static boolean cadastrarCommit(Repositorio repositorio) {
 		Commit c = lerDadosCommit();
 		if(d.getnCommits() < 100) {
+			d.adicionarCommit(repositorio, c);
 			d.setCommit(d.getnCommits(), c);
 			d.setnCommits(d.getnCommits()+1);
 			System.out.println("Commit cadastrado com sucesso!\n");
@@ -408,19 +468,11 @@ public class Main {
 		return c;	
 	}
 	
-	public static void removerCommit() {
-		System.out.println("Escolha um dos commits a seguir para ser removido:\n");
-		listarCommits();
-		int i = in.nextInt();
-		if(i < d.getnCommits() && i > 0) {
-			swapListaCommits(i);
-			d.setCommit(d.getnCommits(), null);
-			d.setnCommits(d.getnCommits() - 1);
-			System.out.println("Commit removido com sucesso");
-		} else {
-			System.out.println("Voce escolheu um numero invalido!");
-		}
-		
+	public static void removerCommit(Repositorio repositorio) {
+		System.out.print("Digite o nome do Commit a ser removido: ");
+		String nomeRemoverCommit = in.next();
+        d.removerCommit(repositorio, nomeRemoverCommit);
+
 	}
 	
 	public static void swapListaCommits(int c) {
@@ -428,31 +480,36 @@ public class Main {
 			d.setCommit(i, d.getCommit(i+1));
 	}
 	
-	public static void editar(int i, Commit c) {
+	public static void editarCommit(Repositorio repositorio, int i, Commit c) {
 		if(i < d.getnCommits() && i >= 0) {
-			d.setCommit(i, c);
+			d.editarCommit(repositorio, i, c);
 			System.out.println("Dados editados com sucesso");
 		} else {
 			System.out.println("Voce escolheu um numero invalido!");
 		}
 	}
 	
-	public static void listarCommits() {
-		in.nextLine(); //esvazia dados do teclado
-		for(int i = 0; i < d.getnCommits(); i++) 
-			System.out.println(i + " -> " + d.getCommits()[i].toString());
-		/* Descomente a linha a seguir para ver a listagem dos alunos em interface gráfica
-		 * new TelaListagem(d.getNomeAlunos());
-		 */
+	public static void listarCommit(Repositorio repositorio) {
+	    in.nextLine(); // Esvazia dados do teclado
+	    ItemControle[] itemControles = repositorio.getListarItensControles();
+	    int i = 0;
+
+	    for (ItemControle itemControle : itemControles) {
+	        if (itemControle != null) {
+	        	i++;
+	            System.out.println(i + " -> " + itemControle.toString());
+	        } 
+	    }
 	}
 	
 	/////////////
 	//Issue
 	/////////////
 	
-	public static boolean cadastrarIssue() {
+	public static boolean cadastrarIssue(Repositorio repositorio) {
 		Issue i = lerDadosIssue();
 		if(d.getnIssues() < 100) {
+			d.adicionarIssue(repositorio, i);
 			d.setIssue(d.getnIssues(), i);
 			d.setnIssues(d.getnIssues()+1);
 			System.out.println("Issue cadastrado com sucesso!\n");
@@ -482,18 +539,10 @@ public class Main {
 		return iss;	
 	}
 	
-	public static void removerIssue() {
-		System.out.println("Escolha um dos issues a seguir para ser removido:\n");
-		listarIssues();
-		int i = in.nextInt();
-		if(i < d.getnIssues() && i > 0) {
-			swapListaIssues(i);
-			d.setIssue(d.getnIssues(), null);
-			d.setnIssues(d.getnIssues() - 1);
-			System.out.println("Issue removido com sucesso");
-		} else {
-			System.out.println("Voce escolheu um numero invalido!");
-		}
+	public static void removerIssue(Repositorio repositorio) {
+		System.out.print("Digite o nome do Issue a ser removido: ");
+		String nomeRemoverIssue = in.next();
+        d.removerIssue(repositorio, nomeRemoverIssue);
 		
 	}
 	
@@ -502,22 +551,26 @@ public class Main {
 			d.setIssue(i, d.getIssue(i+1));
 	}
 	
-	public static void editar(int i, Issue iss) {
+	public static void editarIssue(Repositorio repositorio, int i, Issue iss) {
 		if(i < d.getnIssues() && i >= 0) {
-			d.setIssue(i, iss);
+			d.editarIssue(repositorio, i, iss);
 			System.out.println("Dados editados com sucesso");
 		} else {
 			System.out.println("Voce escolheu um numero invalido!");
 		}
 	}
 	
-	public static void listarIssues() {
-		in.nextLine(); //esvazia dados do teclado
-		for(int i = 0; i < d.getnIssues(); i++) 
-			System.out.println(i + " -> " + d.getIssues()[i].toString());
-		/* Descomente a linha a seguir para ver a listagem dos alunos em interface gráfica
-		 * new TelaListagem(d.getNomeAlunos());
-		 */
+	public static void listarIssues(Repositorio repositorio) {
+		in.nextLine(); // Esvazia dados do teclado
+	    ItemControle[] itemControles = repositorio.getListarItensControles();
+	    int i = 0;
+
+	    for (ItemControle itemControle : itemControles) {
+	        if (itemControle != null) {
+	        	i++;
+	            System.out.println(i + " -> " + itemControle.toString());
+	        } 
+	    }
 	}
 	
 }
