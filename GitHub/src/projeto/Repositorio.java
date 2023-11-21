@@ -63,6 +63,31 @@ public class Repositorio {
 			return false;
 		}
 	}
+
+	public void editarItemControle(int i, ItemControle r) {
+		if(i < getNumItensControles() && i >= 0) {
+			setItemControle(r, i);
+			System.out.println("Dados editados com sucesso");
+		} else {
+			System.out.println("Voce escolheu um numero invalido!");
+		}
+	}
+
+	public void removerItemControle(String nomeRepositorio) {
+        for (int i = 0; i < numItensControles; i++) {
+            if (listaItensControles[i] != null && listaItensControles[i].getNome().equals(nomeRepositorio)) {
+                // Move os repositórios restantes uma posição para frente
+                for (int j = i; j < numItensControles - 1; j++) {
+                    listaItensControles[j] = listaItensControles[j + 1];
+                }
+                listaItensControles[numItensControles - 1] = null;
+                numItensControles--;
+                System.out.println("Removido com sucesso.");
+                return;
+            }
+        }
+        System.out.println("Não encontrado para remoção.");
+    }
 	
 	public ItemControle buscaItemControle(String nomeItemControle) {
 		ItemControle saida = null;

@@ -136,6 +136,20 @@ public class Dados {
 	}
 	
 	// Commit
+
+	public void adicionarCommit(Repositorio repositorio, ItemControle itemcontrole) {
+		repositorio.addItemControle(itemcontrole);
+	}
+	
+	public void removerCommit(Repositorio repositorio, String nomeCommit) {
+        repositorio.removerItemControle(nomeCommit);
+    }
+	
+	public void editarCommit(Repositorio repositorio, int i, Commit commit) {
+        repositorio.editarItemControle(i, commit);
+    }
+	
+
 	public Commit[] getCommits() {
 		return commits;
 	}
@@ -169,6 +183,20 @@ public class Dados {
 	}
 
 	// Issue
+
+	public void adicionarIssue(Repositorio repositorio, ItemControle itemcontrole) {
+		repositorio.addItemControle(itemcontrole);
+	}
+	
+	public void removerIssue(Repositorio repositorio, String nomeIssue) {
+        repositorio.removerItemControle(nomeIssue);
+    }
+	
+	public void editarIssue(Repositorio repositorio, int i, Issue issue) {
+        repositorio.editarItemControle(i, issue);
+    }
+	
+
 	public Issue[] getIssues() {
 		return issues;
 	}
