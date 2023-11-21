@@ -4,12 +4,10 @@ import java.util.*;
 import projeto.*;
 import view.*;
 import dados.*;
-import projeto.Repositorio;
 
 public class Main {
 	
-	private static final String Repositorio = null;
-	private static Dados d = new Dados();
+	private static Dados d = new Dados(); 		
 	private static Scanner in = new Scanner(System.in);
 	
 	public static void main(String[] args) {
@@ -98,32 +96,25 @@ public class Main {
 		return saida;
 	}
 
-	public static String imprimirMenuProjeto() {
-		String saida = new String("Escolha uma das opçoes a seguir:\n");
-		saida = saida + "00 - Voltar para o menu\n";
-		saida = saida + "01 - Cadastrar novo Projeto\n";
-		saida = saida + "02 - Remover projeto existente\n";
-		saida = saida + "03 - Editar projeto existente\n";
-		saida = saida + "04 - Listar projetos\n";
-		return saida;
-	}
-	
 	//Menu Diferente Teste
 	private static void realizarOperacoesNoUsuario(Dados d, Usuario usuario, Scanner scanner) {
 		int aux;
         while (true) {
-            System.out.println("\nUsuario '" + usuario.getNome() + "':\n");
+            System.out.println("\nUsuario selecionado: '" + usuario.getNome() + "':\n");
             System.out.print("Escolha uma das opcoes a seguir:\n");
+            System.out.println("00 - Voltar ao Menu Principal");
             System.out.println("01 - Cadastrar novo Repositorio");
             System.out.println("02 - Remover repositorio existente");
             System.out.println("03 - Editar repositorio existente");
             System.out.println("04 - Listar repositorios");
-            System.out.println("05 - Voltar ao Menu Principal");
+            System.out.println("05 - Acessar repositorio");
             
-
+            
             int opcaoUsuario = scanner.nextInt();
 
             switch (opcaoUsuario) {
+            	case 0:
+            		return;
                 case 1:
                 	cadastrarRepositorio(usuario);
                     break;
@@ -142,7 +133,17 @@ public class Main {
                 	listarRepositorios(usuario);
                     break;
                 case 5:
-                    return;
+                	System.out.println("Digite o nome do repositorio");
+    			    String nomeAcessarRepositorio = in.next();
+    			    Repositorio repositorioSelecionado = buscarRepositorio(nomeAcessarRepositorio);
+
+    			    if (repositorioSelecionado != null) {
+    			        System.out.println("Repositorio encontrado: " + repositorioSelecionado.getNome());
+    			        realizarOperacoesNoRepositorio(repositorioSelecionado, in);
+    			    } else {
+    			        System.out.println("Repositorio não encontrado.");
+    			    }
+                	break;
 
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
@@ -150,6 +151,36 @@ public class Main {
         }
     }
 	
+	private static void realizarOperacoesNoRepositorio(Repositorio repositorio, Scanner scanner) {
+        int aux;
+
+        while (true) {
+            System.out.println("\nRepositorio '" + repositorio.getNome() + "':");
+            System.out.print("Escolha uma das opcoes a seguir:\n");
+            System.out.println("00 - Voltar ao Menu Principal");
+            System.out.println("01 - Cadastrar novo Commit");
+            System.out.println("02 - Remover commit existente");
+            System.out.println("03 - Editar commit existente");
+            System.out.println("04 - Listar commits");
+            System.out.println("05 - Acessar issue");
+            System.out.println("06 - Cadastrar novo issue");
+            System.out.println("07 - Remover issue existente");
+            System.out.println("08 - Editar issue existente");
+            System.out.println("09 - Listar issues");
+            System.out.println("10 - Acessar issue");
+            
+            int opcaoRepositorio = scanner.nextInt();
+            switch (opcaoRepositorio) {
+            	case 0:
+            		return;
+            	default:
+                    System.out.println("\nOpção Invalida!\n");
+                    break;
+            }
+        }
+	}
+	
+        
 	/////////////
 	//Usuario
 	/////////////
@@ -229,25 +260,40 @@ public class Main {
 	    return null;
     }
 	
+	
+	public static Repositorio buscarRepositorio(String nomeRepositorio) {
+		for (int i = 0; i < d.getnRepositorios(); i++) {
+	        if (d.getRepositorios()[i] != null && d.getRepositorios()[i].getNome().equals(nomeRepositorio)) {
+	            return d.getRepositorios()[i];
+	        }
+	    }
+	    return null;
+    }
+	
+	/*
 	private static void buscarRepositorio(String nome) {
         //Busca Dentro do Usuário
 
-        /*for(int i = 0; i < d.getnUsuarios(); i++) {
+        for(int i = 0; i < d.getnUsuarios(); i++) {
             if(d.getUsuarios()[i].buscaRepositorio(nome)!= null){
                 System.out.println(d.getUsuarios()[i].buscaRepositorio(nome).toString());
             }
         }
-        */
+       
 
         //Dentro do Dados
-        for(int i = 0; i < d.getnRepositorios(); i++) {
+        /*for(int i = 0; i < d.getnRepositorios(); i++) {
             if(d.getRepositorios()[i].getNome().compareToIgnoreCase(nome) == 0) {
                 System.out.println(d.getRepositorios()[i].toString());
+                
+         
             }
         }
-
+		
     }
-	
+	*/
+
+
 	/////////////
 	//Repositorio
 	/////////////
@@ -265,27 +311,6 @@ public class Main {
 			return false;
 		}
 	}
-	
-	/*
-	private static Usuario escolherUsuario() {
-	    System.out.println("Escolha um usuário:");
-
-	    // Listar usuários disponíveis
-	    listarUsuarios();
-
-	    // Solicitar a escolha do usuário
-	    int escolha = in.nextInt();
-	    in.nextLine(); // Limpar o buffer
-
-	    // Verificar se a escolha é válida
-	    if (escolha >= 0 && escolha < d.getnUsuarios()) {
-	        return d.getUsuarios()[escolha];
-	    } else {
-	        System.out.println("Escolha inválida. Retornando null.");
-	        return null;
-	    }
-}*/
-	
 	
 	public static Repositorio lerDadosRepositorio() {  
 		String nomeRepositorio;
