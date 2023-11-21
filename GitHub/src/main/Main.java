@@ -17,6 +17,11 @@ public class Main {
 		
 		while(op != 0) {
 			System.out.print(imprimirMenu());
+			// Verificando se o usuario digitou um numero ao invés de letra ou caractere
+			while (!in.hasNextInt()) {
+				System.out.println("Entrada inválida. Por favor, insira o numero da opção desejada.");
+				in.next(); // Limpa o buffer do scannerpara receber uma nova entrada sem erros
+			}
 			op = in.nextInt();
 			switch (op) {
 				case 0:
@@ -40,7 +45,7 @@ public class Main {
 					listarUsuarios();
 					break;
 			case 5:
-				System.out.println("Digite o nome do usuario");
+				System.out.println("Digite o nome do usuario: ");
 			    String nomeAcessarUsuario = in.next();
 			    Usuario usuarioSelecionado = buscarUsuario(nomeAcessarUsuario);
 
@@ -109,7 +114,12 @@ public class Main {
             System.out.println("04 - Listar repositorios");
             System.out.println("05 - Acessar repositorio");
             
-            
+         // Verificando se o usuario digitou um numero ao invés de letra ou caractere
+		    while (!in.hasNextInt()) {
+		        System.out.println("Entrada inválida. Por favor, insira o numero da opção desejada.");
+		        in.next(); // Limpa o buffer do scannerpara receber uma nova entrada sem erros
+		    }
+		    
             int opcaoUsuario = scanner.nextInt();
 
             switch (opcaoUsuario) {
@@ -122,18 +132,27 @@ public class Main {
                 	removerRepositorio(usuario);
                     break;
                 case 3:
-                	System.out.println("Escolha um dos Repositorios a seguir para editar as informacoes:\n");
-					listarRepositorios(usuario);
-					aux = in.nextInt();
-					System.out.println("\n");
-					Repositorio r = lerDadosRepositorio();
-					editarRepositorio(usuario, aux, r);
-					break;
+                	listarRepositorios(usuario);
+                    System.out.println("Escolha um dos Repositorios para editar as informacoes:");
+                    while (!in.hasNextInt()) {
+        				System.out.println("Entrada inválida. Por favor, insira o numero da opção desejada.");
+        				in.next(); // Limpa o buffer do scannerpara receber uma nova entrada sem erros
+        			}
+                    aux = in.nextInt();
+
+                    // Verifica se há pelo menos um repositório
+                    if (aux >= 0 && aux < usuario.getNumRepositorios()) {
+                        Repositorio r = lerDadosRepositorio();
+                        editarRepositorio(usuario, aux, r);
+                    } else {
+                        System.out.println("Indice de repositorio invalido ou nenhum repositório disponivel para edicao.");
+        			}    	
+                    break;
                 case 4:
                 	listarRepositorios(usuario);
                     break;
                 case 5:
-                	System.out.println("Digite o nome do repositorio");
+                	System.out.println("Digite o nome do repositorio: ");
     			    String nomeAcessarRepositorio = in.next();
     			    Repositorio repositorioSelecionado = buscarRepositorio(nomeAcessarRepositorio);
 
@@ -191,7 +210,7 @@ public class Main {
                 	listarCommit(repositorio);
                     break;
                 case 5:
-                	System.out.println("Digite o nome do commit");
+                	System.out.println("Digite o nome do commit: ");
     			    String nomeAcessarCommit = in.next();
     			    Repositorio commitSelecionado = buscarRepositorio(nomeAcessarCommit);
 
@@ -220,7 +239,7 @@ public class Main {
                 	listarIssues(repositorio);
                     break;
                 case 10:
-                	System.out.println("Digite o nome do Issue");
+                	System.out.println("Digite o nome da Issue: ");
     			    String nomeAcessarIssue = in.next();
     			    Repositorio issueSelecionado = buscarRepositorio(nomeAcessarIssue);
 
@@ -264,9 +283,9 @@ public class Main {
 		in.nextLine(); //esvazia dados do teclado
 		System.out.println("Digite o nome do Usuario: ");
 		nome = in.nextLine();
-		System.out.println("Digite o email do Usuario:");
+		System.out.println("Digite o email do Usuario: ");
 		email = in.nextLine();
-		System.out.println("Digite a senha do Usuario");
+		System.out.println("Digite a senha do Usuario: ");
 		senha = in.nextLine();
 		Usuario u = new Usuario(nome, email, senha);
 		return u;	
@@ -386,23 +405,18 @@ public class Main {
 	}
 	
 	public static void editarRepositorio(Usuario usuario, int i, Repositorio r) {
-		if(i < d.getnRepositorios() && i >= 0) {
 			d.editarRepositorio(usuario, i, r);
-			System.out.println("Dados editados com sucesso");
-		} else {
-			System.out.println("Voce escolheu um numero invalido!");
-		}
 	}
 	
 	public static void listarRepositorios(Usuario usuario) {
-	    in.nextLine(); // Esvazia dados do teclado
+		System.out.print("Lista de Repositorios: \n");
 	    Repositorio[] repositorios = usuario.getListaRepositorios();
 	    int i = 0;
 
 	    for (Repositorio repositorio : repositorios) {
 	        if (repositorio != null) {
-	        	i++;
 	            System.out.println(i + " -> " + repositorio.toString());
+	            i++;
 	        } 
 	    }
 	}
@@ -495,9 +509,9 @@ public class Main {
 	    int i = 0;
 
 	    for (ItemControle itemControle : itemControles) {
-	        if (itemControle != null) {
-	        	i++;
+	        if (itemControle != null) {   	
 	            System.out.println(i + " -> " + itemControle.toString());
+	            i++;
 	        } 
 	    }
 	}
@@ -567,8 +581,8 @@ public class Main {
 
 	    for (ItemControle itemControle : itemControles) {
 	        if (itemControle != null) {
-	        	i++;
 	            System.out.println(i + " -> " + itemControle.toString());
+	            i++;
 	        } 
 	    }
 	}

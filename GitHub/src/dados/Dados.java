@@ -66,7 +66,7 @@ public class Dados {
     }
 	
 	public void editarRepositorio(Usuario usuario, int i, Repositorio repositorio) {
-        usuario.editar(i, repositorio);
+        usuario.editarRepositorio(i, repositorio);
     }
 	
 	public Repositorio[] getRepositorios() {
@@ -240,11 +240,11 @@ public class Dados {
 //	        Repositorio repositorio = new Repositorio("Nome".concat(s), "Data de Criação".concat(s));
 //	        repositorios[i] = repositorio;
 
-	        Commit commit = new Commit("Nome".concat(s), i, "Descricao".concat(s), "Data de Envio".concat(s));
-	        commits[i] = commit;
-
-	        Issue issue = new Issue("Nome".concat(s), i, "Descricao".concat(s), "Status".concat(s));
-	        issues[i] = issue;
+//	        Commit commit = new Commit("Nome".concat(s), i, "Descricao".concat(s), "Data de Envio".concat(s));
+//	        commits[i] = commit;
+//
+//	        Issue issue = new Issue("Nome".concat(s), i, "Descricao".concat(s), "Status".concat(s));
+//	        issues[i] = issue;
 	        
 	    }
 

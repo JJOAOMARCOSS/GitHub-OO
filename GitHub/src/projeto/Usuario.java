@@ -109,12 +109,10 @@ public class Usuario {
         System.out.println("Repositorio não encontrado para remoção.");
     }
 
-	public void editar(int i, Repositorio r) {
+	public void editarRepositorio(int i, Repositorio r) {
 		if(i < getNumRepositorios() && i >= 0) {
 			setRepositorio(r, i);
 			System.out.println("Dados editados com sucesso");
-		} else {
-			System.out.println("Voce escolheu um numero invalido!");
 		}
 	}
 	
