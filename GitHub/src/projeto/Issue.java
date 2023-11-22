@@ -3,8 +3,10 @@ package projeto;
 public class Issue extends ItemControle{
 	private String status;
 	
-	public Issue(String nome, int id, String descricao, String status) {
-		super(nome, id, descricao);
+	public Issue(String n, int numId, String d, String status) {
+		nome = n;
+		id = numId;
+		descricao = d;
 		this.status = status;
 
 	}

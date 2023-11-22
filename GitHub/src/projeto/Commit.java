@@ -3,8 +3,10 @@ package projeto;
 public class Commit extends ItemControle{
 	private String dtEnvio;
 	
-	public Commit(String nome, int id, String descricao, String dtEnvio) {
-		super(nome, id, descricao);
+	public Commit(String n, int numId, String d, String dtEnvio) {
+		nome = n;
+		id = numId;
+		descricao = d;
 		this.dtEnvio = dtEnvio;
 	}
 
