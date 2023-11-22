@@ -93,7 +93,7 @@ public class Usuario {
         return repositorioAchado; //saida
     }
 	
-	public void removerRepositorio(String nomeRepositorio) {
+	public boolean removerRepositorio(String nomeRepositorio) {
         for (int i = 0; i < numRepositorios; i++) {
             if (listaRepositorios[i] != null && listaRepositorios[i].getNome().equals(nomeRepositorio)) {
                 // Move os repositórios restantes uma posição para frente
@@ -102,11 +102,10 @@ public class Usuario {
                 }
                 listaRepositorios[numRepositorios - 1] = null;
                 numRepositorios--;
-                System.out.println("Repositorio removido com sucesso.");
-                return;
+                return true;
             }
         }
-        System.out.println("Repositorio não encontrado para remoção.");
+        return false;
     }
 
 	public void editarRepositorio(int i, Repositorio r) {

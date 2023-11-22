@@ -61,8 +61,8 @@ public class Dados {
 		usuario.addrepositorio(repositorio);
 	}
 	
-	public void removerRepositorio(Usuario usuario, String nomeRepositorio) {
-        usuario.removerRepositorio(nomeRepositorio);
+	public boolean removerRepositorio(Usuario usuario, String nomeRepositorio) {
+        return usuario.removerRepositorio(nomeRepositorio);
     }
 	
 	public void editarRepositorio(Usuario usuario, int i, Repositorio repositorio) {
