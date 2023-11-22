@@ -67,7 +67,7 @@ public class Usuario {
 		this.numRepositorios = numRepositorios;
 	}
 	
-	public boolean addrepositorio(Repositorio r) {
+	/*public boolean addrepositorio(Repositorio r) {
 		if(numRepositorios < 100) {
 			listaRepositorios[numRepositorios] = r;
 			numRepositorios++;
@@ -127,7 +127,7 @@ public class Usuario {
         } 
             return saida;
         }*/
-	
+		
 	public String toString() {
 		return "Usuario: " + nome + ", Email: " + email + ", Senha: " + senha;
 	}
