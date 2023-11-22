@@ -1,3 +1,5 @@
+
+// Pacote principal
 package main;
 
 import java.util.*;
@@ -5,24 +7,32 @@ import projeto.*;
 import view.*;
 import dados.*;
 
+//Classe principal
 public class Main {
 
+	
 	private static Dados d = new Dados(); 		
 	private static Scanner in = new Scanner(System.in);
 
+	 // Método principal
 	public static void main(String[] args) {
 		int op = -1;
 		int aux;
-		d.preencherDados();
+		d.preencherDados();// Preenche dados iniciais
 
+		// Loop principal do menu
 		while(op != 0) {
-			System.out.print(imprimirMenu());
-			// Verificando se o usuario digitou um numero ao invés de letra ou caractere
+			System.out.print(imprimirMenu()); // Exibe o menu principal
+			
+			 // Verifica se o usuário digitou um número
 			while (!in.hasNextInt()) {
 				System.out.println("Entrada invalida. Por favor, insira o numero da opcao desejada.");
 				in.next(); // Limpa o buffer do scanner para receber uma nova entrada sem erros
 			}
-			op = in.nextInt();
+			
+			op = in.nextInt(); // Lê a opção do usuário
+			
+			// Switch para lidar com a opção escolhida
 			switch (op) {
 			case 0:
 				System.out.println("Obrigado por utilizar o GitHub. Ate logo!");
@@ -35,13 +45,14 @@ public class Main {
 				break;
 			case 3:
 			
+				// Editar usuário existente
 				if(d.getnUsuarios() > 0) {
 					System.out.println("Escolha um dos Usuarios para editar as informacoes:");
 					listarUsuarios();
 
 					aux = in.nextInt();
 
-					// Verifica se há pelo menos um repositório
+					   // Verifica se há pelo menos um usuário
 					if (aux >= 0 && aux < d.getnUsuarios()) {
 						Usuario u = lerDadosUsuario();
 						editar(aux, u);
@@ -55,6 +66,7 @@ public class Main {
 
 			case 4:
 
+				// Listar usuários
 				if(d.getnUsuarios() > 0) {
 				listarUsuarios();
 				} else {
@@ -63,6 +75,8 @@ public class Main {
 
 				break;
 			case 5:
+				
+				// Acessar usuário
 				System.out.println("Digite o nome do usuario: ");
 				String nomeAcessarUsuario = in.next();
 				Usuario usuarioSelecionado = buscarUsuario(nomeAcessarUsuario);
@@ -82,6 +96,8 @@ public class Main {
 	/////////////
 	//Menus
 	/////////////
+	
+	// Função para imprimir o menu
 	public static String imprimirMenu() {
 		String saida = new String("Bem vindo ao Menu GitHub! \nEscolha uma das opcoes a seguir:\n");
 		saida = saida + "00 - Sair da aplicacao\n";
@@ -93,7 +109,7 @@ public class Main {
 		return saida;
 	}
 
-	//Menu Diferente Teste
+	// Função para realizar operações no usuário
 	private static void realizarOperacoesNoUsuario(Dados d, Usuario usuario, Scanner scanner) {
 		int aux;
 		while (true) {
@@ -106,7 +122,7 @@ public class Main {
 			System.out.println("04 - Listar repositorios");
 			System.out.println("05 - Acessar repositorio");
 
-			// Verificando se o usuario digitou um numero ao invés de letra ou caractere
+			// Verificando se o usuário digitou um número
 			while (!in.hasNextInt()) {
 				System.out.println("Entrada inválida. Por favor, insira o numero da opção desejada.");
 				in.next(); // Limpa o buffer do scannerpara receber uma nova entrada sem erros
@@ -170,7 +186,8 @@ public class Main {
 			}
 		}
 	}
-
+	
+	// Função para realizar operações no repositório
 	private static void realizarOperacoesNoRepositorio(Repositorio repositorio, Scanner scanner) {
 		int aux;
 
@@ -241,7 +258,7 @@ public class Main {
 
 					aux = in.nextInt();
 
-					// Verifica se há pelo menos um commit
+					// Verifica se há pelo menos um issue
 					if (aux >= 0 && aux < d.getnIssues()) {
 						Issue i = lerDadosIssue();
 						editarIssue(aux, i);
@@ -271,11 +288,11 @@ public class Main {
 		}
 	}
 
-
 	/////////////
 	//Usuario
 	/////////////
 
+	// Função de cadastrar usuário
 	public static boolean cadastrarUsuario() {
 		Usuario u = lerDadosUsuario();
 		if(d.getnUsuarios() < 100) {
@@ -289,11 +306,14 @@ public class Main {
 		}
 	}
 
+	// Função de ler os dados do usuário
 	public static Usuario lerDadosUsuario() {
 		String nome;
 		String email; 
 		String senha;
-		in.nextLine(); //esvazia dados do teclado
+		
+		in.nextLine(); // Limpa o buffer
+		
 		System.out.println("Digite o nome do Usuario: ");
 		nome = in.nextLine();
 		System.out.println("Digite o email do Usuario: ");
@@ -304,6 +324,7 @@ public class Main {
 		return u;	
 	}
 
+	// Função de remover usuário
 	public static void removerUsuario() {
 		System.out.println("Escolha um dos usuarios a seguir para ser removido:\n");
 		listarUsuarios();
@@ -324,9 +345,9 @@ public class Main {
 			d.setUsuario(i, d.getUsuario(i+1));
 	}
 
+	// Função de editar dados do usuário
 	public static void editar(int i, Usuario u) {
 		if (i < d.getnUsuarios() && i >= 0) {
-			// Mantenha os dados existentes, alterando apenas o nome
 			d.getUsuarios()[i].setNome(u.getNome());
 			System.out.println("Nome do usuário editado com sucesso");
 		} else {
@@ -334,12 +355,16 @@ public class Main {
 		}	
 	}
 
+	// Função de listar  usuários
 	public static void listarUsuarios() {
-		in.nextLine(); //esvazia dados do teclado
+		
+		in.nextLine(); // Limpa o buffer
+		
 		for(int i = 0; i < d.getnUsuarios(); i++) 
 			System.out.println(i + " -> " + d.getUsuarios()[i].toString());
 	}
 
+	// Função buscar um usuários
 	public static Usuario buscarUsuario(String nomeUsuario) {
 		for (int i = 0; i < d.getnUsuarios(); i++) {
 			if (d.getUsuarios()[i] != null && d.getUsuarios()[i].getNome().equals(nomeUsuario)) {
@@ -348,10 +373,12 @@ public class Main {
 		}
 		return null;
 	}
+	
 	/////////////
 	//Repositorio
 	/////////////
-
+	
+	// Função de cadastrar repositório
 	public static boolean cadastrarRepositorio() {
 		Repositorio r = lerDadosRepositorio();
 		if(d.getnRepositorios() < 100) {
@@ -365,10 +392,13 @@ public class Main {
 		}
 	}
 
+	// Função de ler dados do repositório
 	public static Repositorio lerDadosRepositorio() {  
 		String nomeRepositorio;
 		String dtCriacao;
+		
 		in.nextLine(); //esvazia dados do teclado
+		
 		System.out.println("Digite o nome do Repositorio: ");
 		nomeRepositorio = in.nextLine();
 		System.out.println("Digite a data de criacao do Repositorio: ");
@@ -377,6 +407,7 @@ public class Main {
 		return r;	
 	}
 
+	// Função de remover repositório
 	public static void removerRepositorio() {
 		if(d.getnRepositorios() != 0) {
 			System.out.println("Escolha um dos repositorios a seguir para ser removido:\n");
@@ -403,7 +434,6 @@ public class Main {
 
 	public static void editarRepositorio(int i, Repositorio r) {
 		if (i < d.getnRepositorios() && i >= 0) {
-			// Mantenha os dados existentes, alterando apenas o nome
 			d.setRepositorio(i, r);
 			System.out.println("Repositorio editado com sucesso");
 		} else {
@@ -411,15 +441,18 @@ public class Main {
 		}	
 	}
 
+	// Função de listar repositórios
 	public static void listarRepositorios() {
 		System.out.print("Lista de Repositorios: \n");
 
-		in.nextLine(); //esvazia dados do teclado
+		in.nextLine(); // Limpa o buffer
+		
 		for(int i = 0; i < d.getnRepositorios(); i++) 
 			System.out.println(i + " -> " + d.getRepositorios()[i].toString());
 		
 	}
-
+	
+	// Função de buscar repositório
 	public static Repositorio buscarRepositorio(String nomeRepositorio) {
 		for (int i = 0; i < d.getnRepositorios(); i++) {
 			if (d.getRepositorios()[i] != null && d.getRepositorios()[i].getNome().equals(nomeRepositorio)) {
@@ -429,11 +462,11 @@ public class Main {
 		return null;
 	}
 
-
 	/////////////
 	//Commit
 	/////////////
  
+	// Função de cadastrar commit	
 	public static boolean cadastrarCommit() {
 		Commit c = lerDadosCommit();
 		if(d.getnCommits() < 100) {
@@ -447,6 +480,7 @@ public class Main {
 		}
 	}
 
+	// Função de ler dados do commit
 	public static Commit lerDadosCommit() {
 		String nome;
 		int id;
@@ -462,10 +496,13 @@ public class Main {
 			System.out.println("Digite o ID: ");
 			if (in.hasNextInt()) {
 				id = in.nextInt();
+				
 				in.nextLine(); // Limpa o buffer
+				
 				break; // Sai do loop se um número inteiro válido for fornecido
 			} else {
 				System.out.println("Por favor, digite um valor numérico para o ID.");
+				
 				in.nextLine(); // Limpa o buffer
 			}
 		}
@@ -480,6 +517,7 @@ public class Main {
 		return c;	
 	}
 
+	// Função de remover commit
 	public static void removerCommit() {
 		if(d.getnCommits() != 0) {
 			System.out.println("Escolha um dos commits a seguir para ser removido:\n");
@@ -504,9 +542,9 @@ public class Main {
 			d.setCommit(i, d.getCommit(i+1));
 	}
 
+	// Função de editar commit
 	public static void editarCommit(int i, Commit c) {
 		if (i < d.getnCommits() && i >= 0) {
-			// Mantenha os dados existentes, alterando apenas o nome
 			d.setCommit(i, c);
 			System.out.println("Commit editado com sucesso");
 		} else {
@@ -514,10 +552,12 @@ public class Main {
 		}	
 	}
 
+	// Função de listar commits
 	public static void listarCommit() {
 		System.out.print("Lista de Commits: \n");
 
-		in.nextLine(); //esvazia dados do teclado
+		in.nextLine(); // Limpa o buffer
+		
 		for(int i = 0; i < d.getnCommits(); i++) 
 			System.out.println(i + " -> " + d.getCommits()[i].toString());
 	}
@@ -526,6 +566,7 @@ public class Main {
 	//Issue
 	/////////////
 
+	// Função de cadastrar issue
 	public static boolean cadastrarIssue() {
 		Issue i = lerDadosIssue();
 		if(d.getnIssues() < 100) {
@@ -539,17 +580,22 @@ public class Main {
 		}
 	}
 
+	// Função de ler dados do issue
 	public static Issue lerDadosIssue() {
 		String nome;
 		int id;
 		String descricao;
 		String status;
-		in.nextLine();
+		
+		in.nextLine(); // Limpa o buffer
+		
 		System.out.println("Digite o nome do Issue: ");
 		nome = in.nextLine();
 		System.out.println("Digite o ID: ");
 		id = in.nextInt();
-		in.nextLine();
+		
+		in.nextLine(); // Limpa o buffer
+		
 		System.out.println("Digite a Descrição: ");
 		descricao = in.nextLine();
 		System.out.println("Digite o status do Issue: ");
@@ -557,7 +603,8 @@ public class Main {
 		Issue iss = new Issue(nome, id, descricao, status);
 		return iss;	
 	}
-
+	
+	// Função de remover issue
 	public static void removerIssue() {
 		if(d.getnIssues() != 0) {
 			System.out.println("Escolha um dos issues a seguir para ser removido:\n");
@@ -581,9 +628,9 @@ public class Main {
 			d.setIssue(i, d.getIssue(i+1));
 	}
 
+	// Função de editar issue
 	public static void editarIssue(int i, Issue iss) {
 		if (i < d.getnIssues() && i >= 0) {
-			// Mantenha os dados existentes, alterando apenas o nome
 			d.setIssue(i, iss);
 			System.out.println("Issue editado com sucesso");
 		} else {
@@ -591,10 +638,12 @@ public class Main {
 		}
 	}
 
+	// Função de listar os issues
 	public static void listarIssues() {
 		System.out.print("Lista de Issues: \n");
 
-		in.nextLine(); //esvazia dados do teclado
+		in.nextLine(); // Limpa o buffer
+		
 		for(int i = 0; i < d.getnIssues(); i++) 
 			System.out.println(i + " -> " + d.getIssues()[i].toString());
 	}

@@ -2,7 +2,10 @@ package dados;
 
 import projeto.*;
 
+//A classe Dados representa o conjunto de dados do sistema.
 public class Dados {
+	
+	// Atributos para armazenar arrays de usuários, repositórios, commits e issues.
 	private Usuario[] usuarios;
 	private int nUsuarios = 0;
 	private Repositorio[] repositorios;
@@ -13,7 +16,7 @@ public class Dados {
 	private int nIssues = 0;
 
 
-	
+	// Construtor padrão que inicializa os arrays.
 	public Dados() {
 		usuarios = new Usuario[100];
 		repositorios = new Repositorio[100];
@@ -21,7 +24,7 @@ public class Dados {
 		issues = new Issue[100];
 	}
 
-	// Usuario
+	// Métodos de acesso para obter os usuários.
 	public Usuario[] getUsuarios() {
 		return usuarios;
 	}
@@ -38,6 +41,7 @@ public class Dados {
 		return s;
 	}
 
+	// Métodos de modificação para definir os usuários.
 	public void setUsuarios(Usuario[] usuarios) {
 		this.usuarios = usuarios;
 	}
@@ -53,6 +57,7 @@ public class Dados {
 		this.nUsuarios = nUsuarios;
 	}
 	
+	// Métodos de acesso para obter os repositórios.
 	public Repositorio[] getRepositorios() {
 		return repositorios;
 	}
@@ -69,6 +74,7 @@ public class Dados {
 		return s;
 	}
 
+	// Métodos de modificação para definir os repositórios.
 	public void setRepositorios(Repositorio[] repositorios) {
 		this.repositorios = repositorios;
 	}
@@ -85,6 +91,7 @@ public class Dados {
 		this.nRepositorios = nRepositorios;
 	}
 
+	// Métodos de acesso para obter os commits.
 	public Commit[] getCommits() {
 		return commits;
 	}
@@ -101,6 +108,7 @@ public class Dados {
 		return s;
 	}
 
+	// Métodos de modificação para definir os commits.
 	public void setCommits(Commit[] commits) {
 		this.commits = commits;
 	}
@@ -117,8 +125,7 @@ public class Dados {
 		this.nCommits = nCommits;
 	}
 
-	// Issue
-
+	// Métodos de acesso para obter as issues.
 	public Issue[] getIssues() {
 		return issues;
 	}
@@ -135,6 +142,7 @@ public class Dados {
 		return s;
 	}
 
+	// Métodos de modificação para definir as issues.
 	public void setIssues(Issue[] issues) {
 		this.issues = issues;
 	}
@@ -151,7 +159,7 @@ public class Dados {
 		this.nIssues = nIssues;
 	}
 
-	
+	// Método para preencher os dados com exemplos.
 	public void preencherDados() {
 		for (int i = 0; i < 10; i++) {
 	        String s = String.valueOf(i);

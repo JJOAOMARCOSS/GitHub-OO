@@ -1,12 +1,13 @@
 package projeto;
 
 public class Usuario {
-	private String nome;
-	private String email;
-	private String senha;
-	private Repositorio[] listaRepositorios = new Repositorio [100];
-	private int numRepositorios;
+	private String nome;							// Atributo para armazenar o nome do usuário.
+	private String email;							// Atributo para armazenar o email do repositório.
+	private String senha;							// Atributo para armazenar a senha do repositório.
+	private Repositorio[] listaRepositorios = new Repositorio [100]; // Array para armazenar repositórios.
+	private int numRepositorios;					// Número de repositórios associados ao usuário.
 	
+	// Construtor para inicializar um objeto Usuario com nome, email e senha.
 	public Usuario(String nome, String email, String senha) {
 		this.nome = nome;
 		this.email = email;
@@ -14,120 +15,72 @@ public class Usuario {
 		numRepositorios = 0;
 	}
 
+	// Método de acesso para obter o nome do Usuário.
 	public String getNome() {
 		return nome;
 	}
 
+	// Método de modificação para definir o nome do Usuário.
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+	// Método de acesso para obter o email do Usuário.
 	public String getEmail() {
 		return email;
 	}
 
+	// Método de modificação para definir o email do Usuário.
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	// Método de acesso para obter a senha do Usuário.
 	public String getSenha() {
 		return senha;
 	}
 
+	// Método de modificação para definir a senha do Usuário.
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 
-	
+	// Método de acesso para obter a lista de repositórios associados ao usuário.
 	public Repositorio[] getListaRepositorios() {
 		return this.listaRepositorios;
 	}
 
+	// Método de modificação para definir a lista de repositórios associados ao usuário.
 	public void setArrayListaRepositorios(Repositorio[] r) {
 		this.listaRepositorios = r;
 	}
 	
+	// Método de acesso para obter um repositório específico da lista.
 	public Repositorio getRepositorio(int i) { 
 		return listaRepositorios[i];
 	}
 	
+	 // Método de modificação para definir a referência para um repositório na lista.
 	public void setArrayRepositorio(Repositorio repo, int i) {
 		this.listaRepositorios[i] = repo;
 	}
 	
+	// Método de modificação para definir a referência para um repositório na lista.
 	public void setRepositorio(Repositorio repo, int i) {
 		this.listaRepositorios[i] = repo;
 	}
 
+	 // Método de acesso para obter o número de repositórios associados ao usuário.
 	public int getNumRepositorios() {
 		return numRepositorios;
 	}
 
+	// Método de modificação para definir o número de repositórios associados ao usuário.
 	public void setNumRepositorios(int numRepositorios) {
 		this.numRepositorios = numRepositorios;
 	}
-	
-	/*public boolean addrepositorio(Repositorio r) {
-		if(numRepositorios < 100) {
-			listaRepositorios[numRepositorios] = r;
-			numRepositorios++;
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public Repositorio buscaRepositorio(String nomeRepositorio) {
-
-        Repositorio repositorioAchado = null; //saida
-        Repositorio repositorioParaComparar;
-
-        for(int i = 0; i < numRepositorios; i++) {
-            repositorioParaComparar = listaRepositorios[i];
-            if(repositorioParaComparar.getNome().compareToIgnoreCase(nomeRepositorio) == 0) {
-                repositorioAchado = repositorioParaComparar;
-                break;
-            }
-        }
-
-        return repositorioAchado; //saida
-    }
-	
-	public boolean removerRepositorio(String nomeRepositorio) {
-        for (int i = 0; i < numRepositorios; i++) {
-            if (listaRepositorios[i] != null && listaRepositorios[i].getNome().equals(nomeRepositorio)) {
-                // Move os repositórios restantes uma posição para frente
-                for (int j = i; j < numRepositorios - 1; j++) {
-                    listaRepositorios[j] = listaRepositorios[j + 1];
-                }
-                listaRepositorios[numRepositorios - 1] = null;
-                numRepositorios--;
-                return true;
-            }
-        }
-        return false;
-    }
-
-	public void editarRepositorio(int i, Repositorio r) {
-		if(i < getNumRepositorios() && i >= 0) {
-			setRepositorio(r, i);
-			System.out.println("Dados editados com sucesso");
-		}
-	}
-	
-    /*
-    //Buscar repositorio por data
-
-    public Repositorio buscaData(String dtCriacao) {
-        Repositorio saida = null;
-        for(int i = 0; i < numRepositorios; i++) {
-            if(saida.getNome().compareToIgnoreCase(dtCriacao) == 0) {
-                saida = listaRepositorios[i];
-            }
-        } 
-            return saida;
-        }*/
 		
+	// Método de representação em formato de string do objeto.
 	public String toString() {
 		return "Usuario: " + nome + ", Email: " + email + ", Senha: " + senha;
 	}
