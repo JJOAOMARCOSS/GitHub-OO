@@ -68,9 +68,7 @@ public class Repositorio {
 		if(i < getNumItensControles() && i >= 0) {
 			setItemControle(r, i);
 			System.out.println("Dados editados com sucesso");
-		} else {
-			System.out.println("Voce escolheu um numero invalido!");
-		}
+		} 
 	}
 
 	public void removerItemControle(String nomeRepositorio) {

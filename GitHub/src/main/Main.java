@@ -132,21 +132,24 @@ public class Main {
                 	removerRepositorio(usuario);
                     break;
                 case 3:
-                	listarRepositorios(usuario);
-                    System.out.println("Escolha um dos Repositorios para editar as informacoes:");
-                    while (!in.hasNextInt()) {
-        				System.out.println("Entrada inválida. Por favor, insira o numero da opção desejada.");
-        				in.next(); // Limpa o buffer do scannerpara receber uma nova entrada sem erros
-        			}
-                    aux = in.nextInt();
+                	if(usuario.getNumRepositorios() > 0) {
+					System.out.println("Escolha um dos Repositorios para editar as informacoes:");
+					listarRepositorios(usuario);
 
+					aux = in.nextInt();
+				
                     // Verifica se há pelo menos um repositório
                     if (aux >= 0 && aux < usuario.getNumRepositorios()) {
                         Repositorio r = lerDadosRepositorio();
                         editarRepositorio(usuario, aux, r);
                     } else {
-                        System.out.println("Indice de repositorio invalido ou nenhum repositório disponivel para edicao.");
-        			}    	
+						System.out.println("Entrada inválida. Por favor, repita o processo.");
+					}
+					
+					} else {
+                        System.out.println("Nenhum repositório disponivel para edicao.");
+        			}
+				    	
                     break;
                 case 4:
                 	listarRepositorios(usuario);
@@ -181,12 +184,10 @@ public class Main {
             System.out.println("02 - Remover commit existente");
             System.out.println("03 - Editar commit existente");
             System.out.println("04 - Listar commits");
-            System.out.println("05 - Acessar issue");
-            System.out.println("06 - Cadastrar novo issue");
-            System.out.println("07 - Remover issue existente");
-            System.out.println("08 - Editar issue existente");
-            System.out.println("09 - Listar issues");
-            System.out.println("10 - Acessar issue");
+            System.out.println("05 - Cadastrar novo issue");
+            System.out.println("06 - Remover issue existente");
+            System.out.println("07 - Editar issue existente");
+            System.out.println("08 - Listar issues");
             
             int opcaoRepositorio = scanner.nextInt();
             switch (opcaoRepositorio) {
@@ -199,57 +200,58 @@ public class Main {
 					removerCommit(repositorio);
                     break;
                 case 3:
-                	System.out.println("Escolha um dos Commits a seguir para editar as informacoes:\n");
-					listarCommit(repositorio);;
-					aux = in.nextInt();
-					System.out.println("\n");
-					Commit c = lerDadosCommit();
-					editarCommit(repositorio, aux, c);
+
+					if(repositorio.getNumItensControles() > 0) {
+                    System.out.println("Escolha um dos Commit para editar as informacoes:");
+					listarCommit(repositorio);
+              
+                    aux = in.nextInt();
+
+                    // Verifica se há pelo menos um commit
+                    if (aux >= 0 && aux < repositorio.getNumItensControles()) {
+                        Commit c = lerDadosCommit();
+                        editarCommit(repositorio, aux, c);
+                    } else {
+						System.out.println("Entrada inválida. Por favor, repita o processo.");
+					}
+					
+					} else {
+                        System.out.println("Nenhum commit disponivel para edicao.");
+        			}
+
 					break;
                 case 4:
                 	listarCommit(repositorio);
                     break;
                 case 5:
-                	System.out.println("Digite o nome do commit: ");
-    			    String nomeAcessarCommit = in.next();
-    			    Repositorio commitSelecionado = buscarRepositorio(nomeAcessarCommit);
-
-    			    if (commitSelecionado != null) {
-    			        System.out.println("Commit encontrado: " + commitSelecionado.getNome());
-    			        realizarOperacoesNoRepositorio(commitSelecionado, in);
-    			    } else {
-    			        System.out.println("Commit não encontrado.");
-    			    }
-                	break;
-                case 6:
                 	cadastrarIssue(repositorio);
                     break;
-                case 7:
+                case 6:
 					removerIssue(repositorio);
                     break;
-                case 8:
-                	System.out.println("Escolha um dos Issues a seguir para editar as informacoes:\n");
-					listarIssues(repositorio);;
-					aux = in.nextInt();
-					System.out.println("\n");
-					Issue i = lerDadosIssue();
-					editarIssue(repositorio, aux, i);
+                case 7:
+                	if(repositorio.getNumItensControles() > 0) {
+                    System.out.println("Escolha um dos issues para editar as informacoes:");
+					listarIssues(repositorio);
+				
+                    aux = in.nextInt();
+
+                    // Verifica se há pelo menos um issue
+                    if (aux >= 0 && aux < repositorio.getNumItensControles()) {	
+                        Issue i = lerDadosIssue();
+                        editarIssue(repositorio, aux, i);
+                    } else {
+						System.out.println("Entrada inválida. Por favor, repita o processo.");
+					}
+					
+					} else {
+                        System.out.println("Nenhum issue disponivel para edicao.");
+        			}
+					
 					break;
-                case 9:
+                case 8:
                 	listarIssues(repositorio);
                     break;
-                case 10:
-                	System.out.println("Digite o nome da Issue: ");
-    			    String nomeAcessarIssue = in.next();
-    			    Repositorio issueSelecionado = buscarRepositorio(nomeAcessarIssue);
-
-    			    if (issueSelecionado != null) {
-    			        System.out.println("Issue encontrado: " + issueSelecionado.getNome());
-    			        realizarOperacoesNoRepositorio(issueSelecionado, in);
-    			    } else {
-    			        System.out.println("Issue não encontrado.");
-    			    }
-                	break;
 
             	default:
                     System.out.println("\nOpção Invalida!\n");
@@ -324,9 +326,6 @@ public class Main {
 		in.nextLine(); //esvazia dados do teclado
 		for(int i = 0; i < d.getnUsuarios(); i++) 
 			System.out.println(i + " -> " + d.getUsuarios()[i].toString());
-		/* Descomente a linha a seguir para ver a listagem dos alunos em interface gráfica
-		 * new TelaListagem(d.getNomeAlunos());
-		 */
 	}
 	
 	public static Usuario buscarUsuario(String nomeUsuario) {
@@ -413,12 +412,19 @@ public class Main {
 	    Repositorio[] repositorios = usuario.getListaRepositorios();
 	    int i = 0;
 
+		boolean repertorioEncontrado = false;
+
 	    for (Repositorio repositorio : repositorios) {
 	        if (repositorio != null) {
 	            System.out.println(i + " -> " + repositorio.toString());
+				repertorioEncontrado = true;
 	            i++;
 	        } 
 	    }
+
+		if(!repertorioEncontrado){
+			System.out.println("Não há nenhum repertorio cadastrado!");
+		}
 	}
 	
 	public static Repositorio buscarRepositorio(String nomeRepositorio) {
@@ -495,12 +501,7 @@ public class Main {
 	}
 	
 	public static void editarCommit(Repositorio repositorio, int i, Commit c) {
-		if(i < d.getnCommits() && i >= 0) {
-			d.editarCommit(repositorio, i, c);
-			System.out.println("Dados editados com sucesso");
-		} else {
-			System.out.println("Voce escolheu um numero invalido!");
-		}
+		d.editarCommit(repositorio, i, c);
 	}
 	
 	public static void listarCommit(Repositorio repositorio) {
@@ -508,12 +509,19 @@ public class Main {
 	    ItemControle[] itemControles = repositorio.getListarItensControles();
 	    int i = 0;
 
+		boolean commitEncontrado = false;
+
 	    for (ItemControle itemControle : itemControles) {
 	        if (itemControle != null) {   	
 	            System.out.println(i + " -> " + itemControle.toString());
+				commitEncontrado = true;
 	            i++;
 	        } 
 	    }
+
+		if(!commitEncontrado){
+			System.out.println("Não há nenhum commit cadastrado!");
+		}
 	}
 	
 	/////////////
@@ -566,12 +574,7 @@ public class Main {
 	}
 	
 	public static void editarIssue(Repositorio repositorio, int i, Issue iss) {
-		if(i < d.getnIssues() && i >= 0) {
-			d.editarIssue(repositorio, i, iss);
-			System.out.println("Dados editados com sucesso");
-		} else {
-			System.out.println("Voce escolheu um numero invalido!");
-		}
+		d.editarIssue(repositorio, i, iss);
 	}
 	
 	public static void listarIssues(Repositorio repositorio) {
@@ -579,12 +582,19 @@ public class Main {
 	    ItemControle[] itemControles = repositorio.getListarItensControles();
 	    int i = 0;
 
+		boolean issueEncontrado = false;
+
 	    for (ItemControle itemControle : itemControles) {
 	        if (itemControle != null) {
 	            System.out.println(i + " -> " + itemControle.toString());
+				issueEncontrado = true;
 	            i++;
 	        } 
 	    }
+
+		if(!issueEncontrado){
+			System.out.println("Não há nenhum issue cadastrado!");
+		}
 	}
 	
 }
