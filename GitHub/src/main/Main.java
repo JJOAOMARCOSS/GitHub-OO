@@ -9,7 +9,6 @@ import dados.*;
 
 //Classe principal
 public class Main {
-
 	
 	private static Dados d = new Dados(); 		
 	private static Scanner in = new Scanner(System.in);
@@ -44,25 +43,24 @@ public class Main {
 				removerUsuario();
 				break;
 			case 3:
-			
+				
 				// Editar usuário existente
 				if(d.getnUsuarios() > 0) {
-					System.out.println("Escolha um dos Usuarios para editar as informacoes:");
-					listarUsuarios();
+                    System.out.println("Escolha um dos Usuarios para editar as informacoes:");
+                    listarUsuarios();
+                    aux = in.nextInt();
+                    
+                 // Verifica se há pelo menos um usuário
+                    if (aux >= 0 && aux < d.getnUsuarios()) {
+                        editarInformacoesNoUsuario(d, d.getUsuarios()[aux], in);
+                    } else {
+                        System.out.println("Entrada inválida. Por favor, repita o processo.");
+                    }
 
-					aux = in.nextInt();
-
-					   // Verifica se há pelo menos um usuário
-					if (aux >= 0 && aux < d.getnUsuarios()) {
-						Usuario u = lerDadosUsuario();
-						editar(aux, u);
-					} else {
-						System.out.println("Entrada inválida. Por favor, repita o processo.");
-					}
-
-				} else {
-					System.out.println("Nenhum usuário disponivel para edicao.");
-				}
+                } else {
+                    System.out.println("Nenhum usuário disponivel para edicao.");
+                }
+                break;
 
 			case 4:
 
@@ -99,194 +97,239 @@ public class Main {
 	
 	// Função para imprimir o menu
 	public static String imprimirMenu() {
-		String saida = new String("Bem vindo ao Menu GitHub! \nEscolha uma das opcoes a seguir:\n");
-		saida = saida + "00 - Sair da aplicacao\n";
-		saida = saida + "01 - Cadastrar novo Usuario\n";
-		saida = saida + "02 - Remover usuario existente\n";
-		saida = saida + "03 - Editar usuario existente\n";
-		saida = saida + "04 - Listar usuarios\n";
-		saida = saida + "05 - Acessar Usuario\n";
-		return saida;
-	}
+        String saida = new String("----------------------------------------------\n" + 
+                "---------Bem vindo(a) ao Menu GitHub!---------\n" + 
+                "----------------------------------------------\n"  +
+                "Escolha uma das opcoes a seguir:\n");
+        saida = saida + "0 - Sair da aplicacao\n";
+        saida = saida + "1 - Cadastrar novo Usuario\n";
+        saida = saida + "2 - Remover usuario existente\n";
+        saida = saida + "3 - Editar usuario existente\n";
+        saida = saida + "4 - Listar usuarios\n";
+        saida = saida + "5 - Acessar Usuario\n";
+        return saida;
+    }
 
 	// Função para realizar operações no usuário
 	private static void realizarOperacoesNoUsuario(Dados d, Usuario usuario, Scanner scanner) {
-		int aux;
-		while (true) {
-			System.out.println("\nUsuario selecionado: '" + usuario.getNome() + "':\n");
-			System.out.print("Escolha uma das opcoes a seguir:\n");
-			System.out.println("00 - Voltar ao Menu Principal");
-			System.out.println("01 - Cadastrar novo Repositorio");
-			System.out.println("02 - Remover repositorio existente");
-			System.out.println("03 - Editar repositorio existente");
-			System.out.println("04 - Listar repositorios");
-			System.out.println("05 - Acessar repositorio");
+        int aux;
+        while (true) {
+            System.out.println("\nUsuario selecionado: '" + usuario.getNome() + "':\n");
+            System.out.print("Escolha uma das opcoes a seguir:\n");
+            System.out.println("00 - Voltar ao Menu Principal");
+            System.out.println("01 - Cadastrar novo Repositorio");
+            System.out.println("02 - Remover repositorio existente");
+            System.out.println("03 - Editar repositorio existente");
+            System.out.println("04 - Listar repositorios");
+            System.out.println("05 - Acessar repositorio");
 
-			// Verificando se o usuário digitou um número
-			while (!in.hasNextInt()) {
-				System.out.println("Entrada inválida. Por favor, insira o numero da opção desejada.");
-				in.next(); // Limpa o buffer do scannerpara receber uma nova entrada sem erros
-			}
+            // Verificando se o usuario digitou um numero ao invés de letra ou caractere
+            while (!in.hasNextInt()) {
+                System.out.println("Entrada inválida. Por favor, insira o numero da opção desejada.");
+                in.next(); // Limpa o buffer do scannerpara receber uma nova entrada sem erros
+            }
 
-			int opcaoUsuario = scanner.nextInt();
+            int opcaoUsuario = scanner.nextInt();
 
-			switch (opcaoUsuario) {
-			case 0:
-				return;
-			case 1:
-				cadastrarRepositorio();
-				break;
-			case 2:
-				removerRepositorio();
-				break;
-			case 3:
-				if(d.getnRepositorios() > 0) {
-					System.out.println("Escolha um dos Repositorios para editar as informacoes:");
-					listarRepositorios();
+            switch (opcaoUsuario) {
+            case 0:
+                return;
+            case 1:
+                cadastrarRepositorio();
+                break;
+            case 2:
+                removerRepositorio();
+                break;
+            case 3:
+                if(d.getnRepositorios() > 0) {
+                    System.out.println("Escolha um dos Repositorios para editar as informacoes:");
+                    listarRepositorios();
 
-					aux = in.nextInt();
+                    aux = in.nextInt();
 
-					// Verifica se há pelo menos um repositório
-					if (aux >= 0 && aux < d.getnRepositorios()) {
-						Repositorio r = lerDadosRepositorio();
-						editarRepositorio(aux, r);
-					} else {
-						System.out.println("Entrada inválida. Por favor, repita o processo.");
-					}
+                    // Verifica se há pelo menos um repositório
+                    if (aux >= 0 && aux < d.getnRepositorios()) {
+                        Repositorio r = lerDadosRepositorio();
+                        editarRepositorio(aux, r);
+                    } else {
+                        System.out.println("Entrada inválida. Por favor, repita o processo.");
+                    }
 
-				} else {
-					System.out.println("Nenhum repositório disponivel para edicao.");
-				}
+                } else {
+                    System.out.println("Nenhum repositório disponivel para edicao.");
+                }
 
-				break;
-			case 4:
+                break;
+            case 4:
 
-				if(d.getnRepositorios() > 0) {
-				listarRepositorios();
-				} else {
-					System.out.println("Nenhum repositório cadastrado.");
-				}
+                if(d.getnRepositorios() > 0) {
+                listarRepositorios();
+                } else {
+                    System.out.println("Nenhum repositório cadastrado.");
+                }
 
-				break;
-			case 5:
-				System.out.println("Digite o nome do repositorio: ");
-				String nomeAcessarRepositorio = in.next();
-				Repositorio repositorioSelecionado = buscarRepositorio(nomeAcessarRepositorio);
+                break;
+            case 5:
+                System.out.println("Digite o nome do repositorio: ");
+                String nomeAcessarRepositorio = in.next();
+                Repositorio repositorioSelecionado = buscarRepositorio(nomeAcessarRepositorio);
 
-				if (repositorioSelecionado != null) {
-					System.out.println("Repositorio encontrado: " + repositorioSelecionado.getNome());
-					realizarOperacoesNoRepositorio(repositorioSelecionado, in);
-				} else {
-					System.out.println("Repositorio não encontrado.");
-				}
-				break;
+                if (repositorioSelecionado != null) {
+                    System.out.println("Repositorio encontrado: " + repositorioSelecionado.getNome());
+                    realizarOperacoesNoRepositorio(repositorioSelecionado, in);
+                } else {
+                    System.out.println("Repositorio não encontrado.");
+                }
+                break;
 
-			default:
-				System.out.println("Opção inválida. Tente novamente.");
-			}
-		}
-	}
+            default:
+                System.out.println("Opção inválida. Tente novamente.");
+            }
+        }
+    }
+
+	private static void editarInformacoesNoUsuario(Dados d, Usuario usuario, Scanner scanner) {
+        while (true) {
+            System.out.println("\nUsuário selecionado: '" + usuario.getNome() + "':\n");
+            System.out.print("Escolha o que deseja editar:\n");
+            System.out.println("1. Nome");
+            System.out.println("2. Email");
+            System.out.println("3. Senha");
+            System.out.println("0. Voltar");
+
+            while (!scanner.hasNextInt()) {
+                System.out.println("Entrada inválida. Por favor, insira o número da opção desejada.");
+                scanner.next(); // Limpa o buffer do scanner para receber uma nova entrada sem erros
+            }
+
+            int opcaoUsuario = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcaoUsuario) {
+                case 0:
+                    return; // Retorna ao menu principal
+                case 1:
+                    System.out.println("\nDigite o novo nome do usuário: ");
+                    String novoNome = scanner.nextLine();
+                    Usuario nNome = new Usuario(novoNome, usuario.getEmail(), usuario.getSenha());
+                    editarUsuario(1, d, usuario, nNome);
+                    break;
+                case 2:
+                    System.out.println("\nDigite o novo email do usuário: ");
+                    String novoEmail = scanner.nextLine();
+                    Usuario nEmail = new Usuario(usuario.getNome(), novoEmail, usuario.getSenha());
+                    editarUsuario(2, d, usuario, nEmail);
+                    break;
+                case 3:
+                    System.out.println("\nDigite a nova senha do usuário: ");
+                    String novaSenha = scanner.nextLine();
+                    Usuario nSenha = new Usuario(usuario.getNome(), usuario.getEmail(), novaSenha);
+                    editarUsuario(3, d, usuario, nSenha);
+                    break;
+                default:
+                    System.out.println("\nOpção inválida. Tente novamente.");
+            }
+        }
+    } 
 	
 	// Função para realizar operações no repositório
 	private static void realizarOperacoesNoRepositorio(Repositorio repositorio, Scanner scanner) {
-		int aux;
+        int aux;
 
-		while (true) {
-			System.out.println("\nRepositorio '" + repositorio.getNome() + "':");
-			System.out.print("Escolha uma das opcoes a seguir:\n");
-			System.out.println("00 - Voltar ao Menu Principal");
-			System.out.println("01 - Cadastrar novo Commit");
-			System.out.println("02 - Remover commit existente");
-			System.out.println("03 - Editar commit existente");
-			System.out.println("04 - Listar commits");
-			System.out.println("05 - Cadastrar novo issue");
-			System.out.println("06 - Remover issue existente");
-			System.out.println("07 - Editar issue existente");
-			System.out.println("08 - Listar issues");
+        while (true) {
+            System.out.println("\nRepositorio '" + repositorio.getNome() + "':");
+            System.out.print("Escolha uma das opcoes a seguir:\n");
+            System.out.println("00 - Voltar ao Menu Principal");
+            System.out.println("01 - Cadastrar novo Commit");
+            System.out.println("02 - Remover commit existente");
+            System.out.println("03 - Editar commit existente");
+            System.out.println("04 - Listar commits");
+            System.out.println("05 - Cadastrar novo issue");
+            System.out.println("06 - Remover issue existente");
+            System.out.println("07 - Editar issue existente");
+            System.out.println("08 - Listar issues");
 
-			int opcaoRepositorio = scanner.nextInt();
-			switch (opcaoRepositorio) {
-			case 0:
-				return;
-			case 1:
-				cadastrarCommit();
-				break;
-			case 2:
-				removerCommit();
-				break;
-			case 3:
+            int opcaoRepositorio = scanner.nextInt();
+            switch (opcaoRepositorio) {
+            case 0:
+                return;
+            case 1:
+                cadastrarCommit();
+                break;
+            case 2:
+                removerCommit();
+                break;
+            case 3:
 
-				if(d.getnCommits() > 0) {
-					System.out.println("Escolha um dos Commit para editar as informacoes:");
-					listarCommit();
+                if(d.getnCommits() > 0) {
+                    System.out.println("Escolha um dos Commit para editar as informacoes:");
+                    listarCommit();
 
-					aux = in.nextInt();
+                    aux = in.nextInt();
 
-					// Verifica se há pelo menos um commit
-					if (aux >= 0 && aux < d.getnCommits()) {
-						Commit c = lerDadosCommit();
-						editarCommit(aux, c);
-					} else {
-						System.out.println("Entrada inválida. Por favor, repita o processo.");
-					}
+                    // Verifica se há pelo menos um commit
+                    if (aux >= 0 && aux < d.getnCommits()) {
+                        editarInformacoesNoCommit(d, d.getCommits()[aux], in);
+                    } else {
+                        System.out.println("Entrada inválida. Por favor, repita o processo.");
+                    }
 
-				} else {
-					System.out.println("Nenhum commit disponivel para edicao.");
-				}
+                } else {
+                    System.out.println("Nenhum commit disponivel para edicao.");
+                }
 
-				break;
-			case 4:
+                break;
+                
+            case 4:
 
-				if(d.getnCommits() > 0) {
-				listarCommit();
-				} else {
-					System.out.println("Nenhum commit cadastrado.");
-				}
+                if(d.getnCommits() > 0) {
+                listarCommit();
+                } else {
+                    System.out.println("Nenhum commit cadastrado.");
+                }
 
-				break;
-			case 5:
-				cadastrarIssue();
-				break;
-			case 6:
-				removerIssue();
-				break;
-			case 7:
+                break;
+            case 5:
+                cadastrarIssue();
+                break;
+            case 6:
+                removerIssue();
+                break;
+            case 7:
+                if(d.getnCommits() > 0) {
+                    System.out.println("Escolha um dos Issue para editar as informacoes:");
+                    listarIssues();
+                    aux = in.nextInt();
 
-				if(d.getnCommits() > 0) {
-					System.out.println("Escolha um dos Issue para editar as informacoes:");
-					listarIssues();
+                    // Verifica se há pelo menos um commit
+                    if (aux >= 0 && aux < d.getnIssues()) {
+                        editarInformacoesNaIssue(d, d.getIssues()[aux], in);
+                    } else {
+                        System.out.println("Entrada inválida. Por favor, repita o processo.");
+                    }
 
-					aux = in.nextInt();
+                } else {
+                    System.out.println("Nenhum issue disponivel para edicao.");
+                }
 
-					// Verifica se há pelo menos um issue
-					if (aux >= 0 && aux < d.getnIssues()) {
-						Issue i = lerDadosIssue();
-						editarIssue(aux, i);
-					} else {
-						System.out.println("Entrada inválida. Por favor, repita o processo.");
-					}
+                break;
+            case 8:
 
-				} else {
-					System.out.println("Nenhum issue disponivel para edicao.");
-				}
+                if(d.getnIssues() > 0) {
+                listarIssues();
+                } else {
+                    System.out.println("Nenhum issue cadastrado.");
+                }
 
-				break;
-			case 8:
+                break;
 
-				if(d.getnIssues() > 0) {
-				listarIssues();
-				} else {
-					System.out.println("Nenhum issue cadastrado.");
-				}
-
-				break;
-
-			default:
-				System.out.println("\nOpção Invalida!\n");
-				break;
-			}
-		}
-	}
+            default:
+                System.out.println("\nOpção Invalida!\n");
+                break;
+            }
+        }
+    }
+                
 
 	/////////////
 	//Usuario
@@ -346,14 +389,24 @@ public class Main {
 	}
 
 	// Função de editar dados do usuário
-	public static void editar(int i, Usuario u) {
-		if (i < d.getnUsuarios() && i >= 0) {
-			d.getUsuarios()[i].setNome(u.getNome());
-			System.out.println("Nome do usuário editado com sucesso");
-		} else {
-			System.out.println("Você escolheu um número inválido!");
-		}	
-	}
+	private static void editarUsuario(int opcao, Dados d, Usuario usuario, Usuario novoUsuario) {
+        switch (opcao) {
+            case 1:
+                usuario.setNome(novoUsuario.getNome());
+                System.out.println("Nome do usuário editado com sucesso");
+                break;
+            case 2:
+                usuario.setEmail(novoUsuario.getEmail());
+                System.out.println("Email do usuário editado com sucesso");
+                break;
+            case 3:
+                usuario.setSenha(novoUsuario.getSenha());
+                System.out.println("Senha do usuário editada com sucesso");
+                break;
+            default:
+                System.out.println("Opção inválida");
+        }
+    }
 
 	// Função de listar  usuários
 	public static void listarUsuarios() {
@@ -465,6 +518,77 @@ public class Main {
 	/////////////
 	//Commit
 	/////////////
+	
+	private static void editarInformacoesNoCommit(Dados d, Commit commit, Scanner scanner) {
+        while (true) {
+            System.out.println("\nCommit selecionado: '" + commit.getNome() + "':\n");
+            System.out.print("Escolha o que deseja editar:\n");
+            System.out.println("1. Nome");
+            System.out.println("2. ID");
+            System.out.println("3. Descricao");
+            System.out.println("0. Voltar");
+
+            while (!scanner.hasNextInt()) {
+                System.out.println("Entrada inválida. Por favor, insira o número da opção desejada.");
+                scanner.next(); // Limpa o buffer do scanner para receber uma nova entrada sem erros
+            }
+
+            int opcaoUsuario = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcaoUsuario) {
+                case 0:
+                    return; // Retorna ao menu principal
+                case 1:
+                    System.out.println("Digite o novo nome do commit: ");
+                    String novoNome = scanner.nextLine();
+                    Commit nNome = new Commit(novoNome, commit.getId(), commit.getDescricao(), commit.getDtEnvio());
+                    editarCommit(1, d, commit, nNome);
+                    break;
+                case 2:
+                    while (true) {
+                        System.out.println("Digite o novo ID do commit: ");
+                        if (in.hasNextInt()) {
+                            int novoId = scanner.nextInt();
+                            Commit nId = new Commit(commit.getNome(), novoId, commit.getDescricao(), commit.getDtEnvio());
+                            editarCommit(2, d, commit, nId);
+                            break; // Sai do loop se um número inteiro válido for fornecido
+                        } else {
+                            System.out.println("Por favor, digite um valor numérico para o ID.");
+                            in.nextLine(); // Limpa o buffer
+                        }
+                    }
+                    break;
+                case 3:
+                    System.out.println("Digite a nova descricao do commit: ");
+                    String novaDescricao = scanner.nextLine();
+                    Commit nDescricao = new Commit(commit.getNome(), commit.getId(), novaDescricao, commit.getDtEnvio());
+                    editarCommit(3, d, commit, nDescricao);
+                    break;
+                default:
+                    System.out.println("Opção inválida. Tente novamente.");
+            }
+        }
+    }
+	
+	private static void editarCommit(int opcao, Dados d, Commit commit, Commit novoCommit) {
+        switch (opcao) {
+            case 1:
+                commit.setNome(novoCommit.getNome());
+                System.out.println("Nome do commit editado com sucesso");
+                break;
+            case 2:
+                commit.setId(novoCommit.getId());
+                System.out.println("ID do commit editado com sucesso");
+                break;
+            case 3:
+                commit.setDescricao(novoCommit.getDescricao());
+                System.out.println("Descricao do commit editada com sucesso");
+                break;
+            default:
+                System.out.println("Opcao invalida!");
+        }
+    }
  
 	// Função de cadastrar commit	
 	public static boolean cadastrarCommit() {
@@ -542,15 +666,6 @@ public class Main {
 			d.setCommit(i, d.getCommit(i+1));
 	}
 
-	// Função de editar commit
-	public static void editarCommit(int i, Commit c) {
-		if (i < d.getnCommits() && i >= 0) {
-			d.setCommit(i, c);
-			System.out.println("Commit editado com sucesso");
-		} else {
-			System.out.println("Você escolheu um número inválido!");
-		}	
-	}
 
 	// Função de listar commits
 	public static void listarCommit() {
@@ -565,6 +680,89 @@ public class Main {
 	/////////////
 	//Issue
 	/////////////
+	
+	private static void editarInformacoesNaIssue(Dados d, Issue issue, Scanner scanner) {
+        while (true) {
+            System.out.println("\nIssue selecionada: '" + issue.getNome() + "':\n");
+            System.out.print("Escolha o que deseja editar:\n");
+            System.out.println("1. Nome");
+            System.out.println("2. ID");
+            System.out.println("3. Descricao");
+            System.out.println("4. Status");
+            System.out.println("0. Voltar");
+
+            while (!scanner.hasNextInt()) {
+                System.out.println("Entrada inválida. Por favor, insira o número da opção desejada.");
+                scanner.next(); // Limpa o buffer do scanner para receber uma nova entrada sem erros
+            }
+
+            int opcaoUsuario = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcaoUsuario) {
+                case 0:
+                    return; // Retorna ao menu principal
+                case 1:
+                    System.out.println("Digite o novo nome da issue: ");
+                    String novoNome = scanner.nextLine();
+                    Issue nNome = new Issue(novoNome, issue.getId(), issue.getDescricao(), issue.getStatus());
+                    editarIssue(1, d, issue, nNome);
+                    break;
+                case 2:
+                    while (true) {
+                        System.out.println("Digite o novo ID da issue: ");
+                        if (in.hasNextInt()) {
+                            int novoId = scanner.nextInt();
+                            Issue nId = new Issue(issue.getNome(), novoId, issue.getDescricao(), issue.getStatus());
+                            editarIssue(2, d, issue, nId);
+                            break; // Sai do loop se um número inteiro válido for fornecido
+                        } else {
+                            System.out.println("Por favor, digite um valor numérico para o ID.");
+                            in.nextLine(); // Limpa o buffer
+                        }
+                    }
+                    break;
+                case 3:
+                    System.out.println("Digite a nova descricao da issue: ");
+                    String novaDescricao = scanner.nextLine();
+                    Issue nDescricao = new Issue(issue.getNome(), issue.getId(), novaDescricao, issue.getStatus());
+                    editarIssue(3, d, issue, nDescricao);
+                    break;
+                case 4:
+                    System.out.println("Digite o novo status da issue: ");
+                    String novoStatus = scanner.nextLine();
+                    Issue nStatus = new Issue(issue.getNome(), issue.getId(), issue.getDescricao(), novoStatus);
+                    editarIssue(4, d, issue, nStatus);
+                    break;
+                default:
+                    System.out.println("Opção inválida. Tente novamente.");
+            }
+        }
+    }
+
+	//Função de editar issue
+	private static void editarIssue(int opcao, Dados d, Issue issue, Issue novaIssue) {
+    switch (opcao) {
+        case 1:
+            issue.setNome(novaIssue.getNome());
+            System.out.println("Nome da issue editada com sucesso");
+            break;
+        case 2:
+            issue.setId(novaIssue.getId());
+            System.out.println("ID da issue editada com sucesso");
+            break;
+        case 3:
+            issue.setDescricao(novaIssue.getDescricao());
+            System.out.println("Descricao da issue editada com sucesso");
+            break;
+        case 4:
+            issue.setStatus(novaIssue.getStatus());
+            System.out.println("Status da issue editada com sucesso");
+            break;
+        default:
+            System.out.println("Opcao invalida!");
+    }
+}
 
 	// Função de cadastrar issue
 	public static boolean cadastrarIssue() {
@@ -628,15 +826,6 @@ public class Main {
 			d.setIssue(i, d.getIssue(i+1));
 	}
 
-	// Função de editar issue
-	public static void editarIssue(int i, Issue iss) {
-		if (i < d.getnIssues() && i >= 0) {
-			d.setIssue(i, iss);
-			System.out.println("Issue editado com sucesso");
-		} else {
-			System.out.println("Você escolheu um número inválido!");
-		}
-	}
 
 	// Função de listar os issues
 	public static void listarIssues() {

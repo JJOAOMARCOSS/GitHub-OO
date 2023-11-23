@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="add"/>
+		<item key="selection" value="editarUsuario"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="editarUsuario"/>
+			<item value="editarCommit"/>
+			<item value="realizarOperacoesNoUsuario"/>
 			<item value="add"/>
 			<item value="editar"/>
 			<item value="removerRepositorio"/>
@@ -17,12 +20,9 @@
 			<item value="adicionarrepo"/>
 			<item value="adicionar"/>
 			<item value="removerre"/>
-			<item value="realizarOperacoesNoUsuario"/>
 			<item value="buscarUsuario"/>
 			<item value="buscar"/>
 			<item value="lerDadosRepositorio"/>
-			<item value="cadastrarRepositorio"/>
-			<item value="null"/>
 		</list>
 		<list key="replacehistory">
 			<item value=""/>
