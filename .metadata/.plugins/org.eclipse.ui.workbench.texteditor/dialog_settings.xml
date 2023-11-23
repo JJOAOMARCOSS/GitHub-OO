@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="selecionado"/>
+		<item key="selection" value="Não ha nenhum repertorio cadastrado!"/>
 		<item key="wrap" value="false"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="selecionado"/>
-			<item value="Editando Issue"/>
-			<item value="Issue selecionada:"/>
-			<item value="Editando Commi"/>
-			<item value="Removendo Issue"/>
-			<item value="Removendo Commit"/>
-			<item value="Cadastrando Issue"/>
-			<item value="lerDadosIssue"/>
-			<item value="lerDadosCommit"/>
-			<item value="digite o iD"/>
+			<item value="Não ha nenhum repertorio cadastrado!"/>
 			<item value="Lista de Repositorios:"/>
-			<item value="sucesso"/>
-			<item value="Nome do usuário editado com sucesso"/>
-			<item value="0"/>
-			<item value=" -"/>
+			<item value="listarRepositorios"/>
+			<item value="nao ha"/>
+			<item value="Não há"/>
+			<item value="Editando Repositorio"/>
+			<item value="editarRepo"/>
+			<item value="editar"/>
+			<item value="editar repositorio"/>
+			<item value="editarInformacoesNo"/>
+			<item value="editarCommit"/>
+			<item value="lerdadosRepos"/>
+			<item value="lerdados"/>
+			<item value="Cadastrando Repositorio"/>
+			<item value="selecionado"/>
 		</list>
 		<list key="replacehistory">
 			<item value=""/>
@@ -31,8 +31,8 @@
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="1230"/>
-		<item key="DIALOG_Y_ORIGIN" value="276"/>
+		<item key="DIALOG_X_ORIGIN" value="1069"/>
+		<item key="DIALOG_Y_ORIGIN" value="99"/>
 		<item key="DIALOG_WIDTH" value="322"/>
 		<item key="DIALOG_HEIGHT" value="391"/>
 		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>

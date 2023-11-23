@@ -144,19 +144,18 @@ public class Main {
                 cadastrarRepositorio();
                 break;
             case 2:
-                removerRepositorio();
+                removerRepositorio(usuario);
                 break;
             case 3:
                 if(d.getnRepositorios() > 0) {
                     System.out.println("Escolha um dos Repositorios para editar as informacoes:");
-                    listarRepositorios();
+                    listarRepositorios(usuario);
 
                     aux = in.nextInt();
 
                     // Verifica se há pelo menos um repositório
                     if (aux >= 0 && aux < d.getnRepositorios()) {
-                        Repositorio r = lerDadosRepositorio();
-                        editarRepositorio(aux, r);
+                        editarInformacoesNoRepositorio(d, d.getRepositorios()[aux], in);
                     } else {
                         System.out.println("Entrada inválida. Por favor, repita o processo.");
                     }
@@ -169,7 +168,7 @@ public class Main {
             case 4:
 
                 if(d.getnRepositorios() > 0) {
-                listarRepositorios();
+                listarRepositorios(usuario);
                 } else {
                     System.out.println("\nNenhum repositório cadastrado.");
                 }
@@ -443,6 +442,48 @@ public class Main {
 	//Repositorio
 	/////////////
 	
+	private static void editarInformacoesNoRepositorio(Dados d, Repositorio repositorio, Scanner scanner) {
+        while (true) {
+        	System.out.println("\n-------------" + "Editando Repositorio" + "-------------");
+            System.out.println("\nRepositorio selecionado: '" + repositorio.getNome() + "'\n");
+            System.out.print("Escolha o que deseja editar:\n");
+            System.out.println("1. Nome");
+            System.out.println("0. Voltar");
+
+            while (!scanner.hasNextInt()) {
+                System.out.println("Entrada inválida. Por favor, insira o número da opção desejada.");
+                scanner.next(); // Limpa o buffer do scanner para receber uma nova entrada sem erros
+            }
+
+            int opcaoUsuario = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcaoUsuario) {
+                case 0:
+                    return; // Retorna ao menu principal
+                case 1:
+                    System.out.println("Digite o novo nome do repositorio: ");
+                    String novoNome = scanner.nextLine();
+                    Repositorio nNome = new Repositorio(novoNome, repositorio.getDtCriacao());
+                    editarRepositorio(1, d, repositorio, nNome);
+                    break;
+                default:
+                    System.out.println("Opção inválida. Tente novamente.");
+            }
+        }
+    }
+	
+	private static void editarRepositorio(int opcao, Dados d, Repositorio repositorio, Repositorio novoRepositorio) {
+        switch (opcao) {
+            case 1:
+                repositorio.setNome(novoRepositorio.getNome());
+                System.out.println("\nNome do repositorio editado com sucesso!");
+                break;
+            default:
+                System.out.println("\nOpcao invalida.");
+        }
+    }
+
 	// Função de cadastrar repositório
 	public static boolean cadastrarRepositorio() {
 		Repositorio r = lerDadosRepositorio();
@@ -473,48 +514,46 @@ public class Main {
 	}
 
 	// Função de remover repositório
-	public static void removerRepositorio() {
-		if(d.getnRepositorios() != 0) {
-			System.out.println("Escolha um dos repositorios a seguir para ser removido:\n");
-			listarRepositorios();
-			int i = in.nextInt();
-			if(i < d.getnRepositorios() && i >= 0) {
-				swapListaRepositorios(i);
-				d.setRepositorio(d.getnRepositorios(), null);
-				d.setnRepositorios(d.getnRepositorios() - 1);
-				System.out.println("\nRepositorio removido com sucesso!\n");
-			} else {
-				System.out.println("\nVoce escolheu um numero invalido.\n");
-			}
-		} else {
-			System.out.println("\nNão existe nenhum repositorio cadastrado.");
-		}
+	public static boolean removerRepositorio(Usuario usuario) {
+        System.out.print("Digite o nome do repositório a ser removido: ");
+        String nomeRemoverRepositorio = in.next();
+        if(d.removerRepositorio(usuario, nomeRemoverRepositorio)) {
+            System.out.println("Repositorio removido com sucesso.");
+            return true;
+        }else {
+            System.out.println("Repositorio não encontrado para remocao.");
+            return false;
+        }
 
-	}
+    }
 
 	public static void swapListaRepositorios(int r) {
 		for(int i = r; i < d.getnRepositorios() - 1; i++) 
 			d.setRepositorio(i, d.getRepositorio(i+1));
 	}
 
-	public static void editarRepositorio(int i, Repositorio r) {
-		if (i < d.getnRepositorios() && i >= 0) {
-			d.setRepositorio(i, r);
-			System.out.println("\nRepositorio editado com sucesso");
-		} else {
-			System.out.println("\nVocê escolheu um número inválido!");
-		}	
-	}
-
 	// Função de listar repositórios
-	public static void listarRepositorios() {
+	public static void listarRepositorios(Usuario usuario) {
 		System.out.print("\nLista de Repositorios: \n");
 
-		in.nextLine(); // Limpa o buffer
-		
-		for(int i = 0; i < d.getnRepositorios(); i++) 
-			System.out.println(i + " -> " + d.getRepositorios()[i].toString());
-		
+        in.nextLine(); // Limpa o buffer
+
+        Repositorio[] repositorios = usuario.getListaRepositorios();
+        int i = 0;
+
+        boolean repertorioEncontrado = false;
+
+        for (Repositorio repositorio : repositorios) {
+            if (repositorio != null) {
+                System.out.println(i + " -> " + repositorio.toString());
+                repertorioEncontrado = true;
+                i++;
+            } 
+        }
+
+        if(!repertorioEncontrado){
+            System.out.println("\nNao existem repositorios cadastrados.");
+        }
 	}
 	
 	// Função de buscar repositório

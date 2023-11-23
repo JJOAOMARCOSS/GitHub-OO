@@ -58,6 +58,11 @@ public class Dados {
 	}
 	
 	// Métodos de acesso para obter os repositórios.
+	
+	public boolean removerRepositorio(Usuario usuario, String nomeRepositorio) {
+        return usuario.removerRepositorio(nomeRepositorio);
+	}
+	
 	public Repositorio[] getRepositorios() {
 		return repositorios;
 	}

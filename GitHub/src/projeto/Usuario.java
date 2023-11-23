@@ -79,6 +79,21 @@ public class Usuario {
 	public void setNumRepositorios(int numRepositorios) {
 		this.numRepositorios = numRepositorios;
 	}
+	
+	public boolean removerRepositorio(String nomeRepositorio) {
+        for (int i = 0; i < numRepositorios; i++) {
+            if (listaRepositorios[i] != null && listaRepositorios[i].getNome().equals(nomeRepositorio)) {
+                // Move os repositórios restantes uma posição para frente
+                for (int j = i; j < numRepositorios - 1; j++) {
+                    listaRepositorios[j] = listaRepositorios[j + 1];
+                }
+                listaRepositorios[numRepositorios - 1] = null;
+                numRepositorios--;
+                return true;
+            }
+        }
+        return false;
+    }
 		
 	// Método de representação em formato de string do objeto.
 	public String toString() {
